@@ -12,3 +12,4 @@ function reveal() {
 
 window.addEventListener("scroll", reveal);
 window.addEventListener("load", reveal);
+<script src="script.js"></script>
