@@ -6,7 +6,6 @@
   <title>LeadX365 — Grow With AI</title>
   <meta name="description" content="LeadX365 — AI lead automation, WhatsApp automation, ads & more. Start your growth journey." />
 
-  <!-- Basic inline styles (single file for easy deploy) -->
   <style>
     :root{
       --max-w: 1100px;
@@ -19,360 +18,381 @@
       --text: #0b0b0b;
       --muted: #666;
     }
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none}
+
+    html,body{
+      height:100%;margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+      background:var(--bg);color:var(--text);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    a{text-decoration:none;color:inherit}
+
     .container{max-width:var(--max-w);margin:0 auto;padding:28px;}
-    /* HEADER / NAV */
-    header{position:sticky;top:0;backdrop-filter: blur(6px);background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.55));border-bottom:1px solid rgba(0,0,0,0.04);z-index:30}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:var(--max-w);margin:0 auto;padding:14px 20px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(135deg,var(--accent-a),var(--accent-b));box-shadow:0 6px 18px rgba(37,117,252,0.12)}
-    .logo svg{width:28px;height:28px;transform:translateY(-1px)}
-    .brand h4{margin:0;font-size:18px;font-weight:700}
-    .menu{display:flex;gap:18px;align-items:center}
-    .menu a{padding:8px 6px;font-weight:600;color:var(--text);opacity:0.9}
-    .btn-cta{background:transparent;border:2px solid #000;padding:8px 18px;border-radius:28px;font-weight:700}
-    /* HERO */
-    .hero{
-      margin:18px auto 28px;
-      width:92%;
-      max-width:980px;
-      border-radius:20px;
-      padding:42px 28px;
-      color:#fff;
-      background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
-      box-shadow: 0 18px 40px rgba(37,117,252,0.12);
-      text-align:center;
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:30;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 20px;max-width:var(--max-w);margin:0 auto;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:10px;
+    }
+
+    /* REAL LOGO */
+    .brand img{
+      height:40px;width:auto;
+      object-fit:contain;
       display:block;
     }
-    .hero h1{font-size:34px;margin:0 0 8px;line-height:1.05}
-    .hero p{margin:0 0 18px;color:rgba(255,255,255,0.95);font-size:16px}
-    .hero .btn{display:inline-block;padding:14px 26px;border-radius:30px;border:2px solid #000;background:#fff;color:#000;font-weight:700;text-decoration:none}
-    /* SECTIONS */
-    section{max-width:var(--max-w);margin:36px auto;padding:0 20px}
+
+    .brand h4{margin:0;font-size:18px;font-weight:700}
+
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{padding:8px 6px;font-weight:600;opacity:0.9}
+
+    .btn-cta{
+      border:2px solid #000;padding:8px 16px;border-radius:26px;
+      font-weight:700;background:transparent;
+    }
+
+    /* HERO SECTION — reduced height */
+    .hero{
+      width:92%;max-width:980px;
+      margin:20px auto;
+      border-radius:20px;
+      padding:28px 20px; /* reduced */
+      text-align:center;color:#fff;
+      background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
+      box-shadow:0 14px 32px rgba(37,117,252,0.18);
+    }
+
+    .hero h1{font-size:30px;margin:0 0 6px}
+    .hero p{margin:0 0 12px;color:#fff}
+    .hero .btn{
+      display:inline-block;background:#fff;color:#000;border:2px solid #000;
+      padding:12px 22px;border-radius:28px;font-weight:700;
+    }
+
+    section{max-width:var(--max-w);margin:34px auto;padding:0 20px}
     h2{font-size:22px;margin:8px 0 16px;font-weight:800}
-    p.lead{color:var(--muted);font-size:16px;margin:0 0 20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;align-items:stretch}
-    .card{background:var(--card-bg);padding:20px;border-radius:var(--radius);box-shadow:0 8px 18px rgba(10,10,10,0.03);min-height:120px}
+
+    p.lead{color:var(--muted);font-size:16px;margin-bottom:16px}
+
+    .grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:var(--card-bg);padding:20px;border-radius:var(--radius);
+      box-shadow:0 6px 16px rgba(0,0,0,0.04);
+    }
+
     .card h3{margin:0 0 8px;font-size:18px}
-    .price{font-weight:800}
-    /* testimonials */
-    .testi{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .testi .card p{margin:6px 0}
-    /* FAQ & Why */
-    .faq{padding:16px}
-    .faq-item{margin-bottom:12px}
+
+    /* TESTIMONIAL GRID */
+    .testi{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+
+    /* STAR STYLE */
+    .stars{
+      font-size:18px;color:#fbbf24;margin-bottom:6px;
+    }
+
+    /* WHY SECTION */
     .why li{margin:8px 0}
+
     /* CTA Section */
     .cta{
-      margin:28px auto;padding:36px;border-radius:18px;color:#fff;
+      margin:28px auto;padding:34px;border-radius:16px;text-align:center;
       background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
-      text-align:center;
+      color:#fff;
     }
-    .cta .btn{margin-top:14px}
-    .contact p{margin:8px 0;color:rgba(255,255,255,0.95)}
-    /* Footer */
-    footer{padding:28px;text-align:center;color:var(--muted);font-size:14px}
-    /* Floating whatsapp */
+
+    .cta .btn{
+      display:inline-block;margin-top:14px;
+      padding:12px 22px;border-radius:28px;
+      background:#fff;color:#000;border:2px solid #000;font-weight:700;
+    }
+
+    /* WhatsApp FAB */
     .whatsapp{
-      position:fixed;right:18px;bottom:18px;background:#25D366;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,117,252,0.12);z-index:40;border:4px solid #fff;
+      position:fixed;bottom:18px;right:18px;width:56px;height:56px;
+      background:#25D366;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 10px 28px rgba(0,0,0,0.15);
+      border:4px solid #fff;z-index:50;
     }
+
     .whatsapp svg{width:30px;height:30px;fill:#fff}
-    /* Fade-in animation classes */
-    .reveal{opacity:0;transform:translateY(18px);transition:all 700ms cubic-bezier(.2,.9,.2,1)}
+
+    /* Fade-In Animations */
+    .reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}
     .reveal.in{opacity:1;transform:none}
-    /* Responsive */
-    @media (max-width:700px){
-      .hero h1{font-size:28px}
-      .nav .menu{display:none}
+
+    @media(max-width:700px){
+      .menu{display:none}
       .brand h4{display:none}
     }
   </style>
 </head>
+
 <body>
 
-  <!-- HEADER / NAV -->
-  <header>
-    <nav class="nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <!-- Minimal SVG mark as logo -->
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path fill="#fff" d="M12 2c.9 0 1.8.34 2.47.97l5.56 5.56c1.3 1.3 1.3 3.4 0 4.7L13.7 21.8c-1.3 1.3-3.4 1.3-4.7 0L3.44 16.2c-1.3-1.3-1.3-3.4 0-4.7L8.77 5A3.35 3.35 0 0 1 12 2z"/>
-          </svg>
-        </div>
-        <h4>LeadX365</h4>
-      </div>
+<header>
+  <nav class="nav">
+    <div class="brand">
+      <img src="https://i.ibb.co/5xWt7gRM/file-00000000c66c7209aa546551ca843503-1.png" alt="LeadX365 Logo">
+      <h4>LeadX365</h4>
+    </div>
 
-      <div class="menu" role="navigation" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact" class="btn-cta">Get in Touch</a>
-      </div>
-    </nav>
-  </header>
+    <div class="menu">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn-cta">Get in Touch</a>
+    </div>
+  </nav>
+</header>
+
+<main>
 
   <!-- HERO -->
-  <main>
-    <section class="hero reveal" aria-label="Hero">
-      <div style="max-width:840px;margin:0 auto">
-        <h1>Grow Your Business With AI 🚀</h1>
-        <p>Generate more leads, automate your marketing, and scale your business effortlessly.</p>
-        <a class="btn" href="#contact" id="hero-cta">Start Your Growth Journey</a>
-      </div>
-    </section>
+  <section class="hero reveal">
+    <h1>Grow Your Business With AI 🚀</h1>
+    <p>Generate more leads, automate your marketing, and scale effortlessly.</p>
+    <a class="btn" href="#contact" id="hero-cta">Start Your Growth Journey</a>
+  </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="reveal">
-      <div class="container">
-        <h2>About LeadX365</h2>
-        <p class="lead">We help businesses grow using AI-powered tools, automation, and smart workflows that work 24/7. No technical setup required — we do it for you.</p>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services" class="reveal">
-      <div class="container">
-        <h2>Our Services</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>AI Lead Automation</h3>
-            <p>Capture, nurture, and convert leads automatically — smarter follow-ups and segmentation.</p>
-          </div>
-          <div class="card">
-            <h3>WhatsApp Automation</h3>
-            <p>Automated replies, 24/7 lead capture, and multi-step follow-ups tuned for conversions.</p>
-          </div>
-          <div class="card">
-            <h3>Digital Ads Support</h3>
-            <p>Campaign setup and optimisation for Meta and Google to drive quality leads.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRICING -->
-    <section id="pricing" class="reveal">
-      <div class="container">
-        <h2>Our Pricing</h2>
-        <div class="grid">
-          <div class="card">
-            <h3 class="price">Starter Plan – ₹1,899/month</h3>
-            <p>Basic automation + WhatsApp replies + monthly reporting</p>
-          </div>
-          <div class="card">
-            <h3 class="price">Growth Plan – ₹4,999/month</h3>
-            <p>Advanced automation + daily reports + multi-channel ads</p>
-          </div>
-          <div class="card">
-            <h3 class="price">Pro Plan – ₹9,499/month</h3>
-            <p>Everything in Growth + priority support + daily analytics</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LET'S GROW FASTER -->
-    <section class="reveal">
-      <div class="container">
-        <div style="border-radius:16px;padding:26px;background:linear-gradient(135deg, rgba(106,17,203,0.08), rgba(37,117,252,0.06));">
-          <h2>Let’s Grow Faster</h2>
-          <p class="lead">AI-powered lead generation + smart follow-ups that work 24/7 for your business.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="reveal">
-      <div class="container">
-        <h2>Testimonials</h2>
-        <div class="testi">
-          <div class="card"><strong>Ravi Kumar</strong><p>"LeadX365 helped me generate 50+ new customer leads every week."</p></div>
-          <div class="card"><strong>Megha Store</strong><p>"Automated my WhatsApp fully. Huge time-saver!"</p></div>
-          <div class="card"><strong>Arun Digital</strong><p>"Great support and excellent ROI. Highly recommended."</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="reveal">
-      <div class="container">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq">
-          <div class="faq-item"><b>How does LeadX365 generate leads?</b><p>We use AI + automated ads + smart follow-ups to bring quality leads.</p></div>
-          <div class="faq-item"><b>Is this suitable for small businesses?</b><p>Yes — built for all sizes and industries.</p></div>
-          <div class="faq-item"><b>Do I need technical skills?</b><p>Nope — everything is managed by us; you receive leads.</p></div>
-          <div class="faq-item"><b>How fast can I see results?</b><p>Most clients see results in 7–15 days depending on niche & ads.</p></div>
-          <div class="faq-item"><b>What’s included with WhatsApp automation?</b><p>Instant replies, follow-ups, engagement and full lead capture 24/7.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY CHOOSE US -->
-    <section class="reveal">
-      <div class="container">
-        <h2>Why Choose Us?</h2>
-        <ul class="why">
-          <li>AI-powered automation</li>
-          <li>Zero manual work</li>
-          <li>Affordable monthly plans</li>
-          <li>Works across industries</li>
-          <li>Proven results</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- CONTACT / FORM (Google Sheets backend) -->
-    <section id="contact" class="reveal">
-      <div class="container">
-        <h2>Ready to Grow? LET'S TALK!</h2>
-
-        <!-- Contact card + form -->
-        <div style="display:grid;grid-template-columns:1fr;gap:14px;max-width:720px;margin:8px auto">
-          <div style="background:var(--card-bg);padding:18px;border-radius:12px">
-            <p class="lead">Start your growth journey today. Fill this quick form and we'll reach out within 24 hours.</p>
-
-            <!-- The form submits JSON via Fetch to your Apps Script endpoint.
-                 Replace the ACTION_URL placeholder with your deployed Google Apps Script URL (see instructions below). -->
-            <form id="lead-form">
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <input name="name" id="name" placeholder="Your name" required style="padding:12px;border-radius:8px;border:1px solid #ddd" />
-                <input name="phone" id="phone" placeholder="Phone (WhatsApp preferred)" required style="padding:12px;border-radius:8px;border:1px solid #ddd" />
-                <input type="email" name="email" id="email" placeholder="Email (optional)" style="padding:12px;border-radius:8px;border:1px solid #ddd" />
-                <textarea name="message" id="message" placeholder="A short note (optional)" rows="3" style="padding:12px;border-radius:8px;border:1px solid #ddd"></textarea>
-                <div style="display:flex;gap:10px;align-items:center">
-                  <button id="sendBtn" type="submit" class="btn-cta" style="cursor:pointer">Send Request</button>
-                  <button id="waBtn" type="button" class="btn-cta" style="background:#fff;border:2px solid #25D366;color:#25D366">WhatsApp</button>
-                </div>
-                <p id="form-msg" style="color:green;display:none;margin:6px 0;font-weight:700"></p>
-              </div>
-            </form>
-
-            <p style="margin-top:12px;color:var(--muted)">Or call: <a href="tel:+919000810084">+91 90008 10084</a> • Email: <a href="mailto:leadx365official@gmail.com">leadx365official@gmail.com</a></p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="cta reveal" aria-label="final-cta">
-      <div class="container">
-        <h2>Ready to Grow? LET'S TALK!</h2>
-        <a class="btn" href="#contact">Get in Touch</a>
-        <div class="contact" style="margin-top:12px">
-          <p>📞 +91 90008 10084</p>
-          <p>📧 leadx365official@gmail.com</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FLOATING WHATSAPP -->
-  <a class="whatsapp" id="whatsapp-fab" href="https://wa.me/919000810084" target="_blank" title="Chat on WhatsApp">
-    <!-- whatsapp svg -->
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M19.11 17.8c-.31-.16-1.81-.89-2.09-.99-.28-.1-.49-.16-.7.16s-.8.99-.98 1.2c-.18.2-.36.22-.67.08-.31-.14-1.32-.49-2.51-1.54-.93-.83-1.56-1.86-1.74-2.17-.18-.31-.02-.48.13-.63.13-.13.28-.34.42-.51.14-.17.18-.28.28-.46.09-.18.05-.34-.03-.5-.08-.16-.7-1.68-.96-2.3-.25-.6-.51-.52-.7-.53-.18-.01-.4-.01-.62-.01-.21 0-.55.08-.84.39-.28.31-1.1 1.07-1.1 2.6 0 1.53 1.12 3.01 1.28 3.22.16.21 2.21 3.4 5.36 4.77 3.14 1.37 3.14.91 3.7.86.57-.05 1.81-.74 2.06-1.45.25-.71.25-1.32.18-1.45-.07-.13-.25-.2-.56-.36zM16 4C9.37 4 4 9.37 4 16c0 1.95.47 3.78 1.3 5.39L4 28l6.9-1.25C12.2 27.16 14.04 27.5 16 27.5 22.63 27.5 28 22.13 28 15.5 28 8.87 22.63 4 16 4z"/></svg>
-  </a>
-
-  <footer>
-    <div style="max-width:var(--max-w);margin:0 auto;padding:6px 20px">
-      © <span id="year"></span> LeadX365 — All rights reserved.
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="container">
+      <h2>About LeadX365</h2>
+      <p class="lead">We help businesses grow using AI-powered tools, automation, and 24/7 workflows.</p>
     </div>
-  </footer>
+  </section>
 
-  <!-- SCRIPTS -->
-  <script>
-    // simple year
-    document.getElementById('year').innerText = new Date().getFullYear();
+  <!-- SERVICES -->
+  <section id="services" class="reveal">
+    <div class="container">
+      <h2>Our Services</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>AI Lead Automation</h3>
+          <p>Capture, nurture & convert leads automatically.</p>
+        </div>
+        <div class="card">
+          <h3>WhatsApp Automation</h3>
+          <p>Instant replies, follow-ups & customer engagement.</p>
+        </div>
+        <div class="card">
+          <h3>Digital Ads Support</h3>
+          <p>Boost your brand with Meta & Google Ads.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    // smooth fade-in using IntersectionObserver
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          obs.unobserve(e.target);
-        }
+  <!-- PRICING -->
+  <section id="pricing" class="reveal">
+    <div class="container">
+      <h2>Our Pricing</h2>
+      <div class="grid">
+        <div class="card"><h3>Starter – ₹1,899</h3><p>Basic automation + WhatsApp replies.</p></div>
+        <div class="card"><h3>Growth – ₹4,999</h3><p>Advanced AI + follow-ups + ads.</p></div>
+        <div class="card"><h3>Pro – ₹9,499</h3><p>Everything in Growth + priority support.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="reveal">
+    <div class="container">
+      <h2>Testimonials</h2>
+      <div class="testi">
+
+        <div class="card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <strong>Ravi Kumar</strong>
+          <p>"LeadX365 helped me generate 50+ new leads every week."</p>
+        </div>
+
+        <div class="card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <strong>Megha Store</strong>
+          <p>"WhatsApp automation saved us hours daily."</p>
+        </div>
+
+        <div class="card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <strong>Arun Digital</strong>
+          <p>"Amazing service & great support."</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="reveal">
+    <div class="container">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <p><b>How do you generate leads?</b><br>AI + ads + automated follow-ups.</p>
+        <p><b>Is this for small businesses?</b><br>Yes, built for all industries.</p>
+        <p><b>Do I need technical skills?</b><br>No setup required.</p>
+        <p><b>How fast are results?</b><br>7–15 days average.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="reveal">
+    <div class="container">
+      <h2>Why Choose Us?</h2>
+      <ul class="why">
+        <li>AI-powered automation</li>
+        <li>Zero manual work</li>
+        <li>Affordable plans</li>
+        <li>Works for all industries</li>
+        <li>Proven results</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="reveal">
+    <div class="container">
+      <h2>Ready to Grow? Let's Talk!</h2>
+
+      <div style="background:var(--card-bg);padding:18px;border-radius:12px;max-width:720px;margin:auto">
+        <p class="lead">Fill this quick form — we’ll contact you within 24 hours.</p>
+
+        <form id="lead-form">
+          <input id="name" placeholder="Your name" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd" required>
+          <input id="phone" placeholder="Phone / WhatsApp" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd" required>
+          <input id="email" placeholder="Email (optional)" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd">
+          <textarea id="message" placeholder="Message (optional)" rows="3" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd"></textarea>
+
+          <button id="sendBtn" type="submit" class="btn-cta" style="cursor:pointer;margin-right:10px">Send Request</button>
+          <button id="waBtn" type="button" class="btn-cta" style="border-color:#25D366;color:#25D366">WhatsApp</button>
+
+          <p id="form-msg" style="display:none;margin-top:10px;font-weight:700"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta reveal">
+    <h2>Ready to Grow?</h2>
+    <a class="btn" href="#contact">Get in Touch</a>
+    <p class="contact">📞 +91 90008 10084<br>📧 leadx365official@gmail.com</p>
+  </section>
+
+</main>
+
+<!-- WhatsApp FAB -->
+<a class="whatsapp" href="https://wa.me/919000810084" target="_blank">
+  <svg viewBox="0 0 32 32"><path d="M19.11 17.8c-.31-.16-1.81-.89-2.09-.99-.28-.1-.49-.16-.7.16s-.8.99-.98 1.2c-.18.2-.36.22-.67.08-.31-.14-1.32-.49-2.51-1.54-.93-.83-1.56-1.86-1.74-2.17-.18-.31-.02-.48.13-.63.13-.13.28-.34.42-.51.14-.17.18-.28.28-.46.09-.18.05-.34-.03-.5-.08-.16-.7-1.68-.96-2.3-.25-.6-.51-.52-.7-.53-.18-.01-.4-.01-.62-.01-.21 0-.55.08-.84.39-.28.31-1.1 1.07-1.1 2.6 0 1.53 1.12 3.01 1.28 3.22.16.21 2.21 3.4 5.36 4.77 3.14 1.37 3.14.91 3.7.86.57-.05 1.81-.74 2.06-1.45.25-.71.25-1.32.18-1.45-.07-.13-.25-.2-.56-.36zM16 4C9.37 4 4 9.37 4 16c0 1.95.47 3.78 1.3 5.39L4 28l6.9-1.25C12.2 27.16 14.04 27.5 16 27.5 22.63 27.5 28 22.13 28 15.5 28 8.87 22.63 4 16 4z"/></svg>
+</a>
+
+<footer style="text-align:center;color:#666;padding:20px">
+  © <span id="year"></span> LeadX365 — All rights reserved.
+</footer>
+
+<script>
+  document.getElementById("year").innerText = new Date().getFullYear();
+
+  // Animations
+  const reveals = document.querySelectorAll(".reveal");
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add("in"); }
+    });
+  },{threshold:.15});
+  reveals.forEach(r=>obs.observe(r));
+
+  // Smooth scroll
+  document.getElementById("hero-cta").addEventListener("click",e=>{
+    e.preventDefault();
+    document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
+  });
+
+  // WhatsApp quick button in form
+  document.getElementById("waBtn").addEventListener("click",function(){
+    const name = document.getElementById("name").value || "";
+    const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
+    window.open("https://wa.me/919000810084?text="+msg, "_blank");
+  });
+
+  // Form handler
+  const ACTION_URL = 'REPLACE_WITH_GOOGLE_SHEETS_SCRIPT';
+  const form = document.getElementById("lead-form");
+  const msg = document.getElementById("form-msg");
+  const sendBtn = document.getElementById("sendBtn");
+
+  form.addEventListener("submit",async function(e){
+    e.preventDefault();
+    msg.style.display="none";
+
+    const payload = {
+      name: name.value.trim(),
+      phone: phone.value.trim(),
+      email: email.value.trim(),
+      message: message.value.trim(),
+      ts: new Date().toISOString()
+    };
+
+    if(!payload.name || !payload.phone){
+      msg.style.color="red";msg.style.display="block";
+      msg.innerText="Please enter name & phone.";
+      return;
+    }
+
+    sendBtn.disabled=true; sendBtn.innerText="Sending...";
+
+    if(ACTION_URL.startsWith("REPLACE")){
+      msg.style.color="green";msg.style.display="block";
+      msg.innerText="Form ready — configure Google Sheets backend.";
+      sendBtn.disabled=false; sendBtn.innerText="Send Request";
+      return;
+    }
+
+    try{
+      const res = await fetch(ACTION_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(payload)
       });
-    }, {threshold: 0.12});
-    reveals.forEach(r => obs.observe(r));
 
-    // Smooth scroll for hero CTA to contact
-    document.getElementById('hero-cta').addEventListener('click', function(e){
-      e.preventDefault();
-      document.querySelector('#contact').scrollIntoView({behavior:'smooth', block:'start'});
-    });
+      if(res.ok){
+        msg.style.color="green";msg.style.display="block";
+        msg.innerText="We received your request!";
+        form.reset();
+      } else { throw new Error(); }
 
-    // WhatsApp quick button inside form
-    document.getElementById('waBtn').addEventListener('click', function(){
-      const phone = encodeURIComponent(document.getElementById('phone').value || '919000810084');
-      const msg = encodeURIComponent("Hi, I want growth support. Name: " + (document.getElementById('name').value || ''));
-      window.open('https://wa.me/' + phone.replace(/\D/g,'') + '?text=' + msg, '_blank');
-    });
+    } catch(err){
+      msg.style.color="red";msg.style.display="block";
+      msg.innerText="Failed — please WhatsApp us directly.";
+    }
 
-    // FORM SUBMIT → send to Google Apps Script (Sheets) via fetch
-    // IMPORTANT: Replace ACTION_URL with your deployed Google Apps Script Web App URL
-    const ACTION_URL = 'REPLACE_WITH_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL';
-    const form = document.getElementById('lead-form');
-    const formMsg = document.getElementById('form-msg');
+    sendBtn.disabled=false; sendBtn.innerText="Send Request";
+  });
+</script>
 
-    form.addEventListener('submit', async (ev) => {
-      ev.preventDefault();
-      const payload = {
-        name: document.getElementById('name').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        message: document.getElementById('message').value.trim(),
-        ts: new Date().toISOString()
-      };
-
-      // basic validation
-      if(!payload.name || !payload.phone){
-        formMsg.style.color = 'red';
-        formMsg.style.display = 'block';
-        formMsg.innerText = 'Please enter name and phone.';
-        return;
-      }
-
-      // show sending
-      const btn = document.getElementById('sendBtn');
-      btn.disabled = true;
-      btn.innerText = 'Sending...';
-
-      try {
-        if (ACTION_URL === 'REPLACE_WITH_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL') {
-          // fallback: show success locally and email fallback (mailto)
-          formMsg.style.color = 'green';
-          formMsg.style.display = 'block';
-          formMsg.innerText = 'Form ready — configure Google Sheets script (see instructions).';
-        } else {
-          // POST JSON
-          const res = await fetch(ACTION_URL, {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify(payload)
-          });
-          if (res.ok) {
-            formMsg.style.color = 'green';
-            formMsg.style.display = 'block';
-            formMsg.innerText = 'Thanks — we received your request. We will call you shortly.';
-            form.reset();
-          } else {
-            throw new Error('Failed to submit');
-          }
-        }
-      } catch(err){
-        formMsg.style.color = 'red';
-        formMsg.style.display = 'block';
-        formMsg.innerText = 'Submission failed. Please call or WhatsApp: +91 90008 10084';
-      } finally {
-        btn.disabled = false;
-        btn.innerText = 'Send Request';
-      }
-    });
-  </script>
 </body>
 </html>
