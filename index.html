@@ -122,12 +122,38 @@
       box-shadow:0 6px 16px rgba(0,0,0,0.04);
     }
 
+    .card h3{margin:0 0 10px;font-size:18px}
+    .card p{margin:0;color:var(--muted)}
+
     .testi{
       display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
       gap:16px;
     }
 
     .stars{font-size:18px;color:#fbbf24;margin-bottom:6px}
+
+    .why-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+
+    .why-card{
+      background:rgba(255,255,255,0.03);border-radius:12px;padding:18px;
+      box-shadow:0 6px 18px rgba(7,12,34,0.02);min-height:120px;
+    }
+    .why-card h4{margin:0 0 8px}
+    .why-card p{margin:0;color:var(--muted)}
+
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+    }
+
+    .feature{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;padding:16px;border:1px solid rgba(0,0,0,0.03);
+      min-height:110px;
+    }
+    .feature h4{margin:0 0 8px;font-size:16px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
 
     .cta{
       margin:28px auto;padding:34px;border-radius:16px;text-align:center;
@@ -184,6 +210,8 @@
     <div class="menu">
       <a href="#about">About</a>
       <a href="#services">Services</a>
+      <a href="#why-automation">Why AI</a>
+      <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#faq">FAQ</a>
@@ -209,6 +237,33 @@
     </div>
   </section>
 
+  <!-- WHY AI AUTOMATION (NEW) -->
+  <section id="why-automation" class="reveal">
+    <div class="container">
+      <h2>Why AI Automation?</h2>
+      <p class="lead">AI automation reduces manual work, shortens response time, and helps convert more visitors into customers — reliably, 24/7.</p>
+
+      <div class="why-list" style="margin-top:12px;">
+        <div class="why-card">
+          <h4>24/7 Lead Capture</h4>
+          <p>No missed opportunities — capture leads any time of day.</p>
+        </div>
+        <div class="why-card">
+          <h4>Faster Follow-ups</h4>
+          <p>Automated replies & sequences that increase conversion rates.</p>
+        </div>
+        <div class="why-card">
+          <h4>Lower Cost per Lead</h4>
+          <p>Reduce manual outreach and ad waste with precise targeting.</p>
+        </div>
+        <div class="why-card">
+          <h4>Consistent Experience</h4>
+          <p>Every lead receives the same high-quality onboarding flow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SERVICES -->
   <section id="services" class="reveal">
     <div class="container">
@@ -217,6 +272,46 @@
         <div class="card"><h3>AI Lead Automation</h3><p>Capture, nurture & convert leads automatically.</p></div>
         <div class="card"><h3>WhatsApp Automation</h3><p>Instant replies, follow-ups & customer engagement.</p></div>
         <div class="card"><h3>Digital Ads Support</h3><p>Boost your brand with Meta & Google Ads.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOMATION FEATURES (NEW) -->
+  <section id="features" class="reveal">
+    <div class="container">
+      <h2>Automation Features</h2>
+      <p class="lead">Everything you need to build a reliable, low-touch sales engine.</p>
+
+      <div class="features-grid" style="margin-top:14px;">
+        <div class="feature">
+          <h4>Auto Lead Capture</h4>
+          <p>Forms, landing pages & chat widgets that push leads directly to your pipeline.</p>
+        </div>
+
+        <div class="feature">
+          <h4>WhatsApp Workflows</h4>
+          <p>Automated WhatsApp responses, reminders, and drip sequences.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Lead Scoring</h4>
+          <p>Prioritize hot leads with behaviour-based scoring and tags.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Scheduled Outreach</h4>
+          <p>Time-based follow-ups and reminders — hands-free.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Analytics & Reports</h4>
+          <p>Daily summaries and conversion insights to improve campaigns.</p>
+        </div>
+
+        <div class="feature">
+          <h4>Integrations</h4>
+          <p>Connect to Google Sheets, Zapier, CRM systems & ad platforms.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -253,20 +348,6 @@
       <p><b>Is this for small businesses?</b><br>Yes, built for all industries.</p>
       <p><b>Do I need technical skills?</b><br>No setup required.</p>
       <p><b>How fast are results?</b><br>7–15 days average.</p>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section class="reveal">
-    <div class="container">
-      <h2>Why Choose Us?</h2>
-      <ul class="why">
-        <li>AI-powered automation</li>
-        <li>Zero manual work</li>
-        <li>Affordable plans</li>
-        <li>Works for all industries</li>
-        <li>Proven results</li>
-      </ul>
     </div>
   </section>
 
@@ -315,8 +396,10 @@
 </footer>
 
 <script>
+  // year
   document.getElementById("year").innerText = new Date().getFullYear();
 
+  // Animations
   const reveals = document.querySelectorAll(".reveal");
   const obs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
@@ -325,15 +408,71 @@
   },{threshold:.15});
   reveals.forEach(r=>obs.observe(r));
 
+  // Smooth scroll
   document.getElementById("hero-cta").addEventListener("click",function(e){
     e.preventDefault();
     document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
   });
 
+  // WhatsApp quick button in form
   document.getElementById("waBtn").addEventListener("click",function(){
     const name = document.getElementById("name").value || "";
     const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
     window.open("https://wa.me/919000810084?text="+msg, "_blank");
+  });
+
+  // Form handler (placeholder ACTION)
+  const ACTION_URL = 'REPLACE_WITH_GOOGLE_SHEETS_SCRIPT';
+  const form = document.getElementById("lead-form");
+  const msg = document.getElementById("form-msg");
+  const sendBtn = document.getElementById("sendBtn");
+
+  form.addEventListener("submit",async function(e){
+    e.preventDefault();
+    msg.style.display="none";
+
+    const payload = {
+      name: name.value.trim(),
+      phone: phone.value.trim(),
+      email: email.value.trim(),
+      message: message.value.trim(),
+      ts: new Date().toISOString()
+    };
+
+    if(!payload.name || !payload.phone){
+      msg.style.color="red";msg.style.display="block";
+      msg.innerText="Please enter name & phone.";
+      return;
+    }
+
+    sendBtn.disabled=true; sendBtn.innerText="Sending...";
+
+    if(ACTION_URL.startsWith("REPLACE")){
+      msg.style.color="green";msg.style.display="block";
+      msg.innerText="Form ready — configure Google Sheets backend.";
+      sendBtn.disabled=false; sendBtn.innerText="Send Request";
+      return;
+    }
+
+    try{
+      const res = await fetch(ACTION_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(payload)
+      });
+
+      if(res.ok){
+        msg.style.color="green";msg.style.display="block";
+        msg.innerText="We received your request!";
+        form.reset();
+      } else { throw new Error(); }
+
+    } catch(err){
+      msg.style.color="red";msg.style.display="block";
+      msg.innerText="Failed — please WhatsApp us directly.";
+    }
+
+    sendBtn.disabled=false; sendBtn.innerText="Send Request";
   });
 </script>
 
