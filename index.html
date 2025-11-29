@@ -9,58 +9,60 @@
     :root{
       --max-w:1100px;
       --accent-a:#6a11cb; --accent-b:#2575fc; --accent-c:#ff7b00;
-      --bg:#fff; --card-bg: linear-gradient(135deg, rgba(106,17,203,0.06), rgba(37,117,252,0.04), rgba(255,123,0,0.04));
-      --radius:14px; --text:#0b0b0b; --muted:#666;
+      --bg:#fff; --card-bg: linear-gradient(135deg, rgba(106,17,203,0.06), rgba(37,117,252,0.04));
+      --radius:14px; --text:#0b0b0b;
       --popup-gradient: linear-gradient(135deg,#6a11cb,#2575fc);
     }
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    html,body{margin:0;font-family:Inter,system-ui;background:#fff;color:#0b0b0b}
     a{text-decoration:none;color:inherit}
-    .container{max-width:var(--max-w);margin:0 auto;padding:28px}
+    .container{max-width:var(--max-w);margin:auto;padding:28px}
 
-    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,0.95);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,0.05)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;max-width:var(--max-w);margin:0 auto}
+    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,0.9);backdrop-filter:blur(6px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
     .brand{display:flex;align-items:center;gap:10px}
-    .brand img{height:40px;width:auto;object-fit:contain}
-    .menu{display:flex;gap:18px;align-items:center}
-    .menu a{padding:8px 6px;font-weight:600;opacity:0.95}
+    .brand img{height:40px}
+    .menu{display:flex;gap:18px}
     .btn-cta{border:2px solid #000;padding:8px 16px;border-radius:26px;font-weight:700;background:transparent}
 
-    .hero{width:92%;max-width:980px;margin:20px auto;border-radius:20px;padding:40px 20px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));box-shadow:0 14px 32px rgba(37,117,252,0.18);position:relative;overflow:hidden}
-    .hero::after{content:"";position:absolute;bottom:-40px;right:-140px;width:420px;height:420px;background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;opacity:0.12;mix-blend-mode:soft-light;pointer-events:none;z-index:1}
-    @media(max-width:700px){.menu{display:none}.brand h4{display:none}.hero::after{width:240px;height:240px;right:-90px;bottom:-10px}}
-    .hero h1{font-size:32px;margin:0 0 10px;font-weight:800}
-    .hero p{margin:0 0 14px;color:#fff}
+    .hero{width:92%;max-width:980px;margin:20px auto;border-radius:20px;padding:40px 20px;text-align:center;color:#fff;
+      background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
+      position:relative;overflow:hidden}
+    .hero::after{content:"";position:absolute;bottom:-40px;right:-140px;width:420px;height:420px;
+      background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;
+      opacity:0.12;pointer-events:none}
+    .hero h1{font-size:32px;margin-bottom:10px;font-weight:800}
     .hero .btn{display:inline-block;background:#fff;color:#000;border:2px solid #000;padding:12px 24px;border-radius:28px;font-weight:700}
 
     section{max-width:var(--max-w);margin:34px auto;padding:0 20px}
-    h2{font-size:24px;margin:8px 0 16px;font-weight:800}
-    .card{background:var(--card-bg);padding:20px;border-radius:var(--radius);box-shadow:0 6px 16px rgba(0,0,0,0.04)}
+    h2{font-size:24px;margin-bottom:16px;font-weight:800}
+    .card{background:var(--card-bg);padding:20px;border-radius:14px}
 
-    /* popup */
-    .lead-popup-backdrop{position:fixed;inset:0;background:rgba(10,10,10,0.35);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:all .28s ease}
-    .lead-popup-backdrop.open{opacity:1;pointer-events:auto}
-    .lead-popup{width:420px;max-width:92%;border-radius:14px;padding:18px;background:var(--popup-gradient);color:#fff;box-shadow:0 20px 60px rgba(40,20,80,0.28);transform:translateY(18px);transition:all .28s ease}
-    .lead-popup.open{transform:none}
-    .lead-popup header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-    .lead-popup header h3{margin:0;font-size:20px}
-    .lead-popup .desc{opacity:0.95;font-size:14px;margin-bottom:10px}
-    .lead-popup form{display:flex;flex-direction:column;gap:10px}
-    .lead-popup input, .lead-popup textarea{border:0;border-radius:10px;padding:12px;font-size:15px}
-    .lead-popup .field{background:#fff;padding:6px;border-radius:10px;color:#000}
-    .lead-popup input::placeholder, .lead-popup textarea::placeholder{color:rgba(0,0,0,0.45)}
-    .lead-popup .actions{display:flex;gap:10px;align-items:center;margin-top:6px}
-    .lead-popup .btn{flex:1;padding:12px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
-    .lead-popup .btn.btn-primary{background:#000;color:#fff}
-    .lead-popup .btn.btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.16);color:#fff}
-    .lead-popup .close-x{background:transparent;border:0;color:rgba(255,255,255,0.9);font-weight:700;cursor:pointer;font-size:18px}
+    /* Toast */
+    .lead-toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);
+      background:#101010;color:#fff;padding:10px 14px;border-radius:10px;opacity:0;
+      transition:0.25s;z-index:300}
+    .lead-toast.show{opacity:1}
 
-    .lead-toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:#101010;color:#fff;padding:10px 14px;border-radius:10px;z-index:300;box-shadow:0 8px 30px rgba(16,16,16,0.35);opacity:0;pointer-events:none;transition:all .25s ease}
-    .lead-toast.show{opacity:1;pointer-events:auto}
-
-    .whatsapp{position:fixed;bottom:18px;right:18px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 10px 28px rgba(0,0,0,0.15);z-index:60}
+    /* WhatsApp FAB */
+    .whatsapp{position:fixed;bottom:18px;right:18px;width:56px;height:56px;background:#25D366;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;border:4px solid #fff;z-index:60}
     .whatsapp svg{width:30px;height:30px;fill:#fff}
 
-    @media(max-width:480px){.lead-popup{padding:14px}.lead-popup header h3{font-size:18px}}
+    /* Popup */
+    .lead-popup-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.35);opacity:0;pointer-events:none;
+      display:flex;align-items:center;justify-content:center;transition:0.3s;z-index:200}
+    .lead-popup-backdrop.open{opacity:1;pointer-events:auto}
+
+    .lead-popup{width:420px;max-width:92%;background:var(--popup-gradient);color:#fff;border-radius:14px;
+      padding:20px;transform:translateY(30px);transition:0.3s}
+    .lead-popup.open{transform:none}
+    .lead-popup .field{background:#fff;padding:6px;border-radius:10px;color:#000}
+    .lead-popup input, .lead-popup textarea{border:0;width:100%;padding:10px;border-radius:10px;font-size:15px}
+    .lead-popup .actions{display:flex;gap:10px;margin-top:10px}
+    .lead-popup .btn{flex:1;padding:12px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+    .btn-primary{background:#000;color:#fff}
+    .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.2);color:#fff}
+    .close-x{background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
   </style>
 </head>
 <body>
@@ -68,7 +70,7 @@
 <header>
   <nav class="nav">
     <div class="brand">
-      <img src="https://i.ibb.co/5xWt7gRM/file-00000000c66c7209aa546551ca843503-1.png" alt="LeadX365 Logo">
+      <img src="https://i.ibb.co/5xWt7gRM/file-00000000c66c7209aa546551ca843503-1.png">
       <h4>LeadX365</h4>
     </div>
     <div class="menu">
@@ -83,323 +85,155 @@
 </header>
 
 <main>
-  <section class="hero reveal">
+  <section class="hero">
     <h1>Grow Your Business With AI 🚀</h1>
     <p>Generate more leads, automate your marketing, and scale effortlessly.</p>
-    <a class="btn" href="#contact" id="hero-cta">Start Your Growth Journey</a>
+    <a class="btn" href="#contact">Start Your Growth Journey</a>
   </section>
 
-  <section id="about" class="reveal">
-    <div class="container"><h2>About LeadX365</h2><p class="lead">We help businesses grow using AI-powered tools, automation, and 24/7 workflows.</p></div>
-  </section>
-
-  <section id="contact" class="reveal">
+  <section id="contact">
     <div class="container">
       <h2>Ready to Grow? Let's Talk!</h2>
       <div class="card" style="max-width:720px;margin:auto">
-        <p class="lead">Fill this quick form — we’ll contact you within 24 hours.</p>
         <form id="lead-form">
-          <input id="name" placeholder="Your name" required style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;width:100%">
-          <input id="phone" placeholder="Phone / WhatsApp" required style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;width:100%">
-          <input id="email" placeholder="Email (optional)" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;width:100%">
-          <textarea id="message" placeholder="Message (optional)" rows="3" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;width:100%"></textarea>
+          <input id="name" placeholder="Your name" required>
+          <input id="phone" placeholder="Phone / WhatsApp" required>
+          <input id="email" placeholder="Email (optional)">
+          <textarea id="message" placeholder="Message (optional)" rows="3"></textarea>
 
-          <button id="sendBtn" type="submit" class="btn-cta" style="cursor:pointer;margin-right:10px">Send Request</button>
+          <button id="sendBtn" class="btn-cta" type="submit">Send Request</button>
           <button id="waBtn" type="button" class="btn-cta" style="border-color:#25D366;color:#25D366">WhatsApp</button>
-
-          <p id="form-msg" style="display:none;margin-top:10px;font-weight:700"></p>
         </form>
       </div>
     </div>
   </section>
-
 </main>
 
 <!-- POPUP -->
-<div id="leadPopupBackdrop" class="lead-popup-backdrop" aria-hidden="true">
-  <div id="leadPopup" class="lead-popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
-    <header>
-      <h3 id="popupTitle">Want a free AI growth audit?</h3>
-      <button class="close-x" id="popupClose" aria-label="Close">✕</button>
+<div id="leadPopupBackdrop" class="lead-popup-backdrop">
+  <div id="leadPopup" class="lead-popup">
+    <header style="display:flex;justify-content:space-between;align-items:center">
+      <h3>Want a free AI growth audit?</h3>
+      <button class="close-x" id="popupClose">✕</button>
     </header>
-    <div class="desc">Share your name & WhatsApp — we'll send a quick audit + next steps.</div>
 
-    <form id="popup-form">
-      <div class="field"><input id="popup-name" name="name" placeholder="Your name" required></div>
-      <div class="field"><input id="popup-phone" name="phone" placeholder="WhatsApp number" required></div>
-      <div class="field"><input id="popup-email" name="email" placeholder="Email (optional)"></div>
-      <textarea id="popup-message" name="message" placeholder="Message (optional)" rows="2" style="border-radius:10px;padding:10px"></textarea>
+    <div class="field"><input id="popup-name" placeholder="Your name"></div>
+    <div class="field"><input id="popup-phone" placeholder="WhatsApp Number"></div>
+    <div class="field"><input id="popup-email" placeholder="Email (optional)"></div>
+    <textarea id="popup-message" placeholder="Message (optional)" rows="2" style="width:100%;border-radius:10px;margin-top:10px"></textarea>
 
-      <div class="actions">
-        <button type="submit" class="btn btn-primary" id="popup-send">Get Audit</button>
-        <button type="button" class="btn btn-ghost" id="popup-skip">Maybe later</button>
-      </div>
-    </form>
+    <div class="actions">
+      <button class="btn btn-primary" id="popup-send">Get Audit</button>
+      <button class="btn btn-ghost" id="popup-skip">Maybe later</button>
+    </div>
   </div>
 </div>
 
-<!-- TOAST -->
-<div id="leadToast" class="lead-toast" role="status" aria-live="polite"></div>
+<!-- Toast -->
+<div id="leadToast" class="lead-toast"></div>
 
-<!-- WHATSAPP FAB -->
-<a class="whatsapp" href="https://wa.me/919000810084" target="_blank" aria-label="WhatsApp">
-  <svg viewBox="0 0 32 32"><path d="M19.11 17.8c-.31-.16-1.81-.89-2.09-.99-.28-.1-.49-.16-.7.16s-.8.99-.98 1.2c-.18.2-.36.22-.67.08-.31-.14-1.32-.49-2.51-1.54-.93-.83-1.56-1.86-1.74-2.17-.18-.31-.02-.48.13-.63.13-.13.28-.34.42-.51.14-.17.18-.28.28-.46.09-.18.05-.34-.03-.5-.08-.16-.7-1.68-.96-2.3-.25-.6-.51-.52-.7-.53-.18-.01-.4-.01-.62-.01-.21 0-.55.08-.84.39-.28.31-1.1 1.07-1.1 2.6 0 1.53 1.12 3.01 1.28 3.22.16.21 2.21 3.4 5.36 4.77 3.14 1.37 3.14.91 3.7.86.57-.05 1.81-.74 2.06-1.45.25-.71.25-1.32.18-1.45-.07-.13-.25-.2-.56-.36zM16 4C9.37 4 4 9.37 4 16c0 1.95.47 3.78 1.3 5.39L4 28l6.9-1.25C12.2 27.16 14.04 27.5 16 27.5 22.63 27.5 28 22.13 28 15.5 28 8.87 22.63 4 16 4z"/></svg>
+<!-- WhatsApp FAB -->
+<a class="whatsapp" href="https://wa.me/919000810084" target="_blank">
+  <svg viewBox="0 0 32 32"><path d="M19.11 17.8c-.31-.16-1.81-.89-2.09-.99-.28-.1-.49-.16-.7.16s-.8.99-.98 1.2c-.18.2-.36.22-.67.08-.31-.14-1.32-.49-2.51-1.54-.93-.83-1.56-1.86-1.74-2.17-.18-.31-.02-.48.13-.63.13-.13.28-.34.42-.51.14-.17.18-.28.28-.46.09-.18.05-.34-.03-.5-.08-.16-.7-1.68-.96-2.3-.25-.6-.51-.52-.7-.53-.18-.01-.4-.01-.62-.01-.21 0-.55.08-.84.39-.28.31-1.1 1.07-1.1 2.6 0 1.53 1.12 3.01 1.28 3.22.16.21 2.21 3.4 5.36 4.77 3.14 1.37 3.14.91 3.7.86.57-.05 1.81-.74 2.06-1.45.25-.71.25-1.32.18-1.45-.07-.13-.25-.2-.56-.36z"/></svg>
 </a>
 
-<footer style="text-align:center;color:#666;padding:20px">
-  © <span id="year"></span> LeadX365 — All rights reserved.
-</footer>
-
 <script>
-/* ---------- CONFIG ---------- */
-// Inserted Sheet.best URL (from you)
+/* CONFIG */
 const ACTION_URL = "https://api.sheetbest.com/sheets/b256dccd-daeb-4a1d-ba8b-68dbb1caf3b0";
-
-// WhatsApp number (international, no plus)
 const WA_NUMBER = "919000810084";
 
-// Popup timing
-const POPUP_DELAY = 6000;         // ms before the popup opens
-const POPUP_COOLDOWN = 1000*60*60*24; // 24 hours
-
-/* ---------- HELPERS ---------- */
-function showToast(text, timeout = 3000){
+/* Toast */
+function showToast(msg){
   const t = document.getElementById("leadToast");
-  t.innerText = text;
+  t.innerText = msg;
   t.classList.add("show");
-  clearTimeout(t._to);
-  t._to = setTimeout(()=> t.classList.remove("show"), timeout);
+  setTimeout(()=> t.classList.remove("show"), 3000);
 }
 
-// returns boolean on success
-async function postToSheetBest(payload){
+/* Send to Sheet.best */
+async function saveLead(payload){
   try{
-    const res = await fetch(ACTION_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      cache: "no-store"
+    const r = await fetch(ACTION_URL,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify(payload)
     });
-    if(!res.ok){
-      // try to parse error body (helpful during debugging)
-      let txt = await res.text();
-      console.warn("Sheet.best non-ok", res.status, txt);
-      return false;
-    }
-    const json = await res.json().catch(()=> null);
-    // sheet.best may return {} or created object — treat as success if status ok
-    return true;
-  } catch(err){
-    console.error("postToSheetBest error:", err);
+    return r.ok;
+  }catch(err){
+    console.error(err);
     return false;
   }
 }
 
-function openWhatsAppWithPayload(payload){
-  const lines = [
-    "New lead — LeadX365",
-    "Source: " + (payload.source || "website"),
-    "Name: " + (payload.name || "-"),
-    "Phone: " + (payload.phone || "-"),
-    "Email: " + (payload.email || "-"),
-    "Message: " + (payload.message || "-")
-  ];
-  const url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
-  window.open(url, "_blank");
-}
+/* Main Form Submit (NO WhatsApp redirect) */
+document.getElementById("lead-form").addEventListener("submit", async (e)=>{
+  e.preventDefault();
 
-/* ---------- SHARED SUBMIT FLOW ---------- */
-async function handleSubmission(payload, btnEl, openWhatsappAfter = true){
-  if(!payload.name || !payload.phone){
-    showToast("Please enter name & phone.");
-    return;
-  }
+  const payload = {
+    Timestamp: new Date().toISOString(),
+    Source: "Website Form",
+    Name: document.getElementById("name").value.trim(),
+    Phone: document.getElementById("phone").value.trim(),
+    Email: document.getElementById("email").value.trim(),
+    Message: document.getElementById("message").value.trim()
+  };
 
-  if(btnEl){ btnEl.disabled = true; btnEl.dataset.orig = btnEl.innerText; btnEl.innerText = "Sending..."; }
-  showToast("Saving lead...");
+  showToast("Saving...");
 
-  const saved = await postToSheetBest(payload);
+  const ok = await saveLead(payload);
+  if(ok) showToast("Submitted ✓");
+  else showToast("Error — try again");
+});
 
-  if(saved){
-    showToast("Saved — opening WhatsApp...");
-  } else {
-    showToast("Could not save — opening WhatsApp anyway.");
-  }
+/* WhatsApp button (ONLY this opens WA) */
+document.getElementById("waBtn").addEventListener("click",()=>{
+  const p = {
+    Name: document.getElementById("name").value.trim(),
+    Phone: document.getElementById("phone").value.trim(),
+    Email: document.getElementById("email").value.trim(),
+    Message: document.getElementById("message").value.trim()
+  };
 
-  if(openWhatsappAfter){
-    setTimeout(()=> openWhatsAppWithPayload(payload), 700);
-  }
+  const text =
+    `New Lead — LeadX365\nName: ${p.Name}\nPhone: ${p.Phone}\nEmail: ${p.Email}\nMessage: ${p.Message}`;
 
-  if(btnEl){ btnEl.disabled = false; btnEl.innerText = btnEl.dataset.orig || "Send Request"; }
-  return saved;
-}
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`,"_blank");
+});
 
-/* ---------- POPUP + USER-TYPING HANDLING ---------- */
-document.addEventListener("DOMContentLoaded", function(){
+/* POPUP */
+const popupBackdrop = document.getElementById("leadPopupBackdrop");
+const popup = document.getElementById("leadPopup");
 
-  document.getElementById("year").innerText = new Date().getFullYear();
+function openPopup(){ popupBackdrop.classList.add("open"); popup.classList.add("open"); }
+function closePopup(){ popupBackdrop.classList.remove("open"); popup.classList.remove("open"); }
 
-  // animation trigger (kept minimal)
-  const reveals = document.querySelectorAll(".reveal");
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); });
-  },{threshold:0.15});
-  reveals.forEach(r=>obs.observe(r));
+/* Popup delay */
+setTimeout(()=> openPopup(), 6000);
 
-  // track if user is typing / focused on input anywhere
-  let userTyping = false;
-  const inputs = Array.from(document.querySelectorAll("input, textarea, [contenteditable='true']"));
-  inputs.forEach(i=>{
-    i.addEventListener("focus", ()=> userTyping = true);
-    i.addEventListener("keydown", ()=> userTyping = true);
-    i.addEventListener("blur", ()=> {
-      // small delay to avoid race with opening
-      setTimeout(()=> userTyping = false, 100);
-    });
-  });
+/* Popup close buttons */
+document.getElementById("popupClose").onclick = closePopup;
+document.getElementById("popup-skip").onclick = closePopup;
 
-  // form (main)
-  const leadForm = document.getElementById("lead-form");
-  const sendBtn = document.getElementById("sendBtn");
-  const waBtn = document.getElementById("waBtn");
-  if(sendBtn) sendBtn.dataset.orig = sendBtn.innerText;
+/* Popup submit (NO WhatsApp redirect) */
+document.getElementById("popup-send").onclick = async()=>{
+  const payload = {
+    Timestamp: new Date().toISOString(),
+    Source: "Popup",
+    Name: document.getElementById("popup-name").value.trim(),
+    Phone: document.getElementById("popup-phone").value.trim(),
+    Email: document.getElementById("popup-email").value.trim(),
+    Message: document.getElementById("popup-message").value.trim()
+  };
 
-  leadForm.addEventListener("submit", async function(e){
-    e.preventDefault();
-    const payload = {
-      source: "website_form",
-      name: document.getElementById("name").value.trim(),
-      phone: document.getElementById("phone").value.trim(),
-      email: document.getElementById("email").value.trim(),
-      message: document.getElementById("message").value.trim(),
-      ts: new Date().toISOString()
-    };
-    await handleSubmission(payload, sendBtn, true);
-    // keep values visible (so user can confirm WhatsApp)
-  });
+  showToast("Saving...");
+  const ok = await saveLead(payload);
 
-  // quick WA without saving
-  waBtn.addEventListener("click", function(){
-    const payload = {
-      source: "website_wa_quick",
-      name: document.getElementById("name").value.trim(),
-      phone: document.getElementById("phone").value.trim(),
-      email: document.getElementById("email").value.trim(),
-      message: document.getElementById("message").value.trim(),
-      ts: new Date().toISOString()
-    };
-    openWhatsAppWithPayload(payload);
-  });
+  if(ok) showToast("Submitted ✓");
+  else showToast("Error — try again");
 
-  // Popup DOM
-  const popupBackdrop = document.getElementById("leadPopupBackdrop");
-  const popup = document.getElementById("leadPopup");
-  const popupClose = document.getElementById("popupClose");
-  const popupSkip = document.getElementById("popup-skip");
-  const popupForm = document.getElementById("popup-form");
-  const popupSend = document.getElementById("popup-send");
-  popupSend.dataset.orig = popupSend.innerText;
-
-  function openPopup(){
-    // do not open if user is typing
-    if(userTyping) {
-      // try again in 3s (will still respect cooldown)
-      setTimeout(()=> attemptOpenPopup(), 3000);
-      return;
-    }
-    popupBackdrop.classList.add("open");
-    popup.classList.add("open");
-    popupBackdrop.setAttribute("aria-hidden","false");
-    setTimeout(()=> {
-      const el = document.getElementById("popup-name");
-      if(el) el.focus();
-    }, 200);
-  }
-  function closePopup(){
-    popupBackdrop.classList.remove("open");
-    popup.classList.remove("open");
-    popupBackdrop.setAttribute("aria-hidden","true");
-  }
-
-  popupClose.addEventListener("click", function(){
-    closePopup();
-    localStorage.setItem("leadx_popup_shown", Date.now().toString());
-  });
-  popupSkip.addEventListener("click", function(){
-    closePopup();
-    localStorage.setItem("leadx_popup_shown", Date.now().toString());
-  });
-
-  popupForm.addEventListener("submit", async function(e){
-    e.preventDefault();
-    popupSend.disabled = true;
-    const payload = {
-      source: "popup",
-      name: document.getElementById("popup-name").value.trim(),
-      phone: document.getElementById("popup-phone").value.trim(),
-      email: document.getElementById("popup-email").value.trim(),
-      message: document.getElementById("popup-message").value.trim(),
-      ts: new Date().toISOString()
-    };
-    await handleSubmission(payload, popupSend, true);
-    // close and set cooldown
-    setTimeout(()=> {
-      popupForm.reset();
-      closePopup();
-      localStorage.setItem("leadx_popup_shown", Date.now().toString());
-      popupSend.disabled = false;
-    }, 600);
-  });
-
-  // close on backdrop click
-  popupBackdrop.addEventListener("click", function(e){
-    if(e.target === popupBackdrop){
-      closePopup();
-      localStorage.setItem("leadx_popup_shown", Date.now().toString());
-    }
-  });
-
-  // escape key
-  document.addEventListener("keydown", function(e){
-    if(e.key === "Escape" && popupBackdrop.classList.contains("open")){
-      closePopup();
-      localStorage.setItem("leadx_popup_shown", Date.now().toString());
-    }
-  });
-
-  // Decide to show popup (respect cooldown)
-  function attemptOpenPopup(){
-    try{
-      const last = parseInt(localStorage.getItem("leadx_popup_shown") || "0", 10);
-      const now = Date.now();
-      if(isNaN(last) || (now - last) > POPUP_COOLDOWN){
-        openPopup();
-      } else {
-        // cooldown active; do not open
-        console.log("Popup cooldown active.");
-      }
-    } catch(err){
-      // if localStorage blocked, just open once after delay
-      openPopup();
-    }
-  }
-
-  // schedule popup after delay but check typing and cooldown when triggered
-  setTimeout(()=> attemptOpenPopup(), POPUP_DELAY);
-
-  // also avoid popup if user focuses form inputs on page (so no surprise while typing)
-  const pageInputs = document.querySelectorAll("input, textarea");
-  pageInputs.forEach(i=>{
-    i.addEventListener("focus", ()=> {
-      // if popup open, close; set cooldown so it won't reopen immediately
-      if(popupBackdrop.classList.contains("open")){
-        closePopup();
-        localStorage.setItem("leadx_popup_shown", Date.now().toString());
-      }
-    });
-  });
-
-}); // DOM ready
+  closePopup();
+};
 </script>
+
 </body>
 </html>
