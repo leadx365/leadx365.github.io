@@ -5,133 +5,64 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>LeadX365 — Grow With AI</title>
   <meta name="description" content="LeadX365 — AI lead automation, WhatsApp automation, ads & more. Start your growth journey." />
-
   <style>
     :root{
-      --max-w: 1100px;
-      --accent-a: #6a11cb;
-      --accent-b: #2575fc;
-      --accent-c: #ff7b00;
-      --bg: #ffffff;
-      --card-bg: linear-gradient(135deg, rgba(106,17,203,0.06), rgba(37,117,252,0.04), rgba(255,123,0,0.04));
-      --radius: 14px;
-      --text: #0b0b0b;
-      --muted: #666;
+      --max-w:1100px;
+      --accent-a:#6a11cb; --accent-b:#2575fc; --accent-c:#ff7b00;
+      --bg:#fff; --card-bg: linear-gradient(135deg, rgba(106,17,203,0.06), rgba(37,117,252,0.04), rgba(255,123,0,0.04));
+      --radius:14px; --text:#0b0b0b; --muted:#666;
       --popup-gradient: linear-gradient(135deg,#6a11cb,#2575fc);
     }
-
-    html,body{
-      height:100%;margin:0;
-      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto;
-      background:var(--bg);color:var(--text);
-      -webkit-font-smoothing:antialiased;
-    }
-
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
     a{text-decoration:none;color:inherit}
+    .container{max-width:var(--max-w);margin:0 auto;padding:28px}
 
-    .container{max-width:var(--max-w);margin:0 auto;padding:28px;}
-
-    /* HEADER */
-    header{
-      position:sticky;top:0;z-index:30;
-      background:rgba(255,255,255,0.95);
-      backdrop-filter:blur(6px);
-      border-bottom:1px solid rgba(0,0,0,0.05);
-    }
-
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:10px 20px;max-width:var(--max-w);margin:0 auto;
-    }
-
+    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,0.95);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,0.05)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;max-width:var(--max-w);margin:0 auto}
     .brand{display:flex;align-items:center;gap:10px}
     .brand img{height:40px;width:auto;object-fit:contain}
-    .brand h4{margin:0;font-size:18px;font-weight:700}
-
     .menu{display:flex;gap:18px;align-items:center}
     .menu a{padding:8px 6px;font-weight:600;opacity:0.95}
     .btn-cta{border:2px solid #000;padding:8px 16px;border-radius:26px;font-weight:700;background:transparent}
 
-    /* HERO */
-    .hero{
-      width:92%;max-width:980px;margin:20px auto;border-radius:20px;padding:40px 20px;
-      text-align:center;color:#fff;background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
-      box-shadow:0 14px 32px rgba(37,117,252,0.18);position:relative;overflow:hidden;
-    }
-    .hero::after{
-      content:"";position:absolute;bottom:-40px;right:-140px;width:420px;height:420px;
-      background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;
-      opacity:0.12;mix-blend-mode:soft-light;pointer-events:none;z-index:1;
-    }
-    @media(max-width:700px){
-      .hero::after{width:240px;height:240px;bottom:-10px;right:-90px;opacity:0.09}
-      .menu{display:none}
-      .brand h4{display:none}
-    }
+    .hero{width:92%;max-width:980px;margin:20px auto;border-radius:20px;padding:40px 20px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));box-shadow:0 14px 32px rgba(37,117,252,0.18);position:relative;overflow:hidden}
+    .hero::after{content:"";position:absolute;bottom:-40px;right:-140px;width:420px;height:420px;background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;opacity:0.12;mix-blend-mode:soft-light;pointer-events:none;z-index:1}
+    @media(max-width:700px){.menu{display:none}.brand h4{display:none}.hero::after{width:240px;height:240px;right:-90px;bottom:-10px}}
     .hero h1{font-size:32px;margin:0 0 10px;font-weight:800}
     .hero p{margin:0 0 14px;color:#fff}
     .hero .btn{display:inline-block;background:#fff;color:#000;border:2px solid #000;padding:12px 24px;border-radius:28px;font-weight:700}
 
     section{max-width:var(--max-w);margin:34px auto;padding:0 20px}
     h2{font-size:24px;margin:8px 0 16px;font-weight:800}
-    p.lead{color:var(--muted);font-size:16px;margin-bottom:16px}
-
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
     .card{background:var(--card-bg);padding:20px;border-radius:var(--radius);box-shadow:0 6px 16px rgba(0,0,0,0.04)}
-    .testi{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-    .stars{font-size:18px;color:#fbbf24;margin-bottom:6px}
 
-    .cta{margin:28px auto;padding:34px;border-radius:16px;text-align:center;background:linear-gradient(135deg,var(--accent-a),var(--accent-b));color:#fff}
-    .cta .btn{display:inline-block;margin-top:14px;padding:12px 22px;border-radius:28px;background:#fff;color:#000;border:2px solid #000;font-weight:700}
-
-    .floating-ai{position:fixed;right:10px;bottom:20px;width:300px;opacity:0.07;pointer-events:none;z-index:-1}
-    @media(max-width:700px){.floating-ai{display:none}}
-
-    .reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}
-    .reveal.in{opacity:1;transform:none}
-
-    /* WhatsApp FAB */
-    .whatsapp{position:fixed;bottom:18px;right:18px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 10px 28px rgba(0,0,0,0.15);z-index:60}
-    .whatsapp svg{width:30px;height:30px;fill:#fff}
-
-    /* --- POPUP STYLES (Gradient popup - Option B) --- */
-    .lead-popup-backdrop{
-      position:fixed;inset:0;background:rgba(10,10,10,0.35);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:all .28s ease;
-    }
+    /* popup */
+    .lead-popup-backdrop{position:fixed;inset:0;background:rgba(10,10,10,0.35);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:all .28s ease}
     .lead-popup-backdrop.open{opacity:1;pointer-events:auto}
-    .lead-popup{
-      width:420px;max-width:92%;border-radius:14px;padding:18px 18px 16px;background:var(--popup-gradient);color:#fff;box-shadow:0 20px 60px rgba(40,20,80,0.28);transform:translateY(18px);transition:all .28s ease;
-    }
+    .lead-popup{width:420px;max-width:92%;border-radius:14px;padding:18px;background:var(--popup-gradient);color:#fff;box-shadow:0 20px 60px rgba(40,20,80,0.28);transform:translateY(18px);transition:all .28s ease}
     .lead-popup.open{transform:none}
     .lead-popup header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
     .lead-popup header h3{margin:0;font-size:20px}
     .lead-popup .desc{opacity:0.95;font-size:14px;margin-bottom:10px}
     .lead-popup form{display:flex;flex-direction:column;gap:10px}
-    .lead-popup input, .lead-popup textarea{
-      border:0;border-radius:10px;padding:12px;font-size:15px;
-      outline:none;
-    }
+    .lead-popup input, .lead-popup textarea{border:0;border-radius:10px;padding:12px;font-size:15px}
+    .lead-popup .field{background:#fff;padding:6px;border-radius:10px;color:#000}
     .lead-popup input::placeholder, .lead-popup textarea::placeholder{color:rgba(0,0,0,0.45)}
-    .lead-popup .field{
-      background:#fff;padding:6px;border-radius:10px;color:#000;
-    }
     .lead-popup .actions{display:flex;gap:10px;align-items:center;margin-top:6px}
-    .lead-popup .actions .btn{
-      flex:1;padding:12px;border-radius:10px;border:0;font-weight:800;cursor:pointer;
-    }
-    .lead-popup .actions .btn.btn-primary{background:#000;color:#fff}
-    .lead-popup .actions .btn.btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.16);color:#fff}
+    .lead-popup .btn{flex:1;padding:12px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+    .lead-popup .btn.btn-primary{background:#000;color:#fff}
+    .lead-popup .btn.btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.16);color:#fff}
     .lead-popup .close-x{background:transparent;border:0;color:rgba(255,255,255,0.9);font-weight:700;cursor:pointer;font-size:18px}
+
     .lead-toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:#101010;color:#fff;padding:10px 14px;border-radius:10px;z-index:300;box-shadow:0 8px 30px rgba(16,16,16,0.35);opacity:0;pointer-events:none;transition:all .25s ease}
     .lead-toast.show{opacity:1;pointer-events:auto}
 
-    @media(max-width:480px){
-      .lead-popup{padding:14px}
-      .lead-popup header h3{font-size:18px}
-    }
+    .whatsapp{position:fixed;bottom:18px;right:18px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 10px 28px rgba(0,0,0,0.15);z-index:60}
+    .whatsapp svg{width:30px;height:30px;fill:#fff}
+
+    @media(max-width:480px){.lead-popup{padding:14px}.lead-popup header h3{font-size:18px}}
   </style>
 </head>
-
 <body>
 
 <header>
@@ -140,7 +71,6 @@
       <img src="https://i.ibb.co/5xWt7gRM/file-00000000c66c7209aa546551ca843503-1.png" alt="LeadX365 Logo">
       <h4>LeadX365</h4>
     </div>
-
     <div class="menu">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -153,67 +83,26 @@
 </header>
 
 <main>
-  <!-- HERO -->
   <section class="hero reveal">
     <h1>Grow Your Business With AI 🚀</h1>
     <p>Generate more leads, automate your marketing, and scale effortlessly.</p>
     <a class="btn" href="#contact" id="hero-cta">Start Your Growth Journey</a>
   </section>
 
-  <!-- CONTENT (kept core) -->
   <section id="about" class="reveal">
     <div class="container"><h2>About LeadX365</h2><p class="lead">We help businesses grow using AI-powered tools, automation, and 24/7 workflows.</p></div>
-  </section>
-
-  <section id="services" class="reveal">
-    <div class="container"><h2>Our Services</h2>
-      <div class="grid">
-        <div class="card"><h3>AI Lead Automation</h3><p>Capture, nurture & convert leads automatically.</p></div>
-        <div class="card"><h3>WhatsApp Automation</h3><p>Instant replies, follow-ups & customer engagement.</p></div>
-        <div class="card"><h3>Digital Ads Support</h3><p>Boost your brand with Meta & Google Ads.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing" class="reveal">
-    <div class="container"><h2>Our Pricing</h2>
-      <div class="grid">
-        <div class="card"><h3>Starter – ₹1,899</h3><p>Basic automation + WhatsApp replies.</p></div>
-        <div class="card"><h3>Growth – ₹4,999</h3><p>Advanced AI + follow-ups + ads.</p></div>
-        <div class="card"><h3>Pro – ₹9,499</h3><p>Everything in Growth + priority support.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonials" class="reveal">
-    <div class="container"><h2>Testimonials</h2>
-      <div class="testi">
-        <div class="card"><div class="stars">⭐⭐⭐⭐⭐</div><strong>Ravi Kumar</strong><p>"LeadX365 helped me generate 50+ new leads every week."</p></div>
-        <div class="card"><div class="stars">⭐⭐⭐⭐⭐</div><strong>Megha Store</strong><p>"WhatsApp automation saved us hours daily."</p></div>
-        <div class="card"><div class="stars">⭐⭐⭐⭐⭐</div><strong>Arun Digital</strong><p>"Amazing service & great support."</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" class="reveal">
-    <div class="container"><h2>FAQ</h2>
-      <p><b>How do you generate leads?</b><br>AI + ads + automated follow-ups.</p>
-      <p><b>Is this for small businesses?</b><br>Yes, built for all industries.</p>
-    </div>
   </section>
 
   <section id="contact" class="reveal">
     <div class="container">
       <h2>Ready to Grow? Let's Talk!</h2>
-
-      <div style="background:var(--card-bg);padding:18px;border-radius:12px;max-width:720px;margin:auto">
+      <div class="card" style="max-width:720px;margin:auto">
         <p class="lead">Fill this quick form — we’ll contact you within 24 hours.</p>
-
         <form id="lead-form">
-          <input id="name" placeholder="Your name" required style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd">
-          <input id="phone" placeholder="Phone / WhatsApp" required style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd">
-          <input id="email" placeholder="Email (optional)" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd">
-          <textarea id="message" placeholder="Message (optional)" rows="3" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd"></textarea>
+          <input id="name" placeholder="Your name" required style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;width:100%">
+          <input id="phone" placeholder="Phone / WhatsApp" required style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;width:100%">
+          <input id="email" placeholder="Email (optional)" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;width:100%">
+          <textarea id="message" placeholder="Message (optional)" rows="3" style="padding:12px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;width:100%"></textarea>
 
           <button id="sendBtn" type="submit" class="btn-cta" style="cursor:pointer;margin-right:10px">Send Request</button>
           <button id="waBtn" type="button" class="btn-cta" style="border-color:#25D366;color:#25D366">WhatsApp</button>
@@ -224,18 +113,9 @@
     </div>
   </section>
 
-  <section class="cta reveal">
-    <h2>Ready to Grow?</h2>
-    <a class="btn" href="#contact">Get in Touch</a>
-    <p class="contact">📞 +91 90008 10084<br>📧 leadx365official@gmail.com</p>
-  </section>
-
 </main>
 
-<!-- FLOATING AI -->
-<img class="floating-ai" src="https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png" alt="AI Graphic">
-
-<!-- POPUP (Gradient) -->
+<!-- POPUP -->
 <div id="leadPopupBackdrop" class="lead-popup-backdrop" aria-hidden="true">
   <div id="leadPopup" class="lead-popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
     <header>
@@ -271,27 +151,19 @@
 </footer>
 
 <script>
-/* -------------------------
-  Configuration
-------------------------- */
+/* ---------- CONFIG ---------- */
+// Inserted Sheet.best URL (from you)
+const ACTION_URL = "https://api.sheetbest.com/sheets/b256dccd-daeb-4a1d-ba8b-68dbb1caf3b0";
 
-// Your Google Apps Script web app /exec URL (already deployed)
-const ACTION_URL = "https://script.google.com/macros/s/AKfycbxa2rVhKHenxqSPHld3u2WPmBufjj4cXA5zo9DbnLmXVgAWBlUFVDjgcgvsBsdtBqJd/exec";
-
-// WhatsApp number (international format, no +)
+// WhatsApp number (international, no plus)
 const WA_NUMBER = "919000810084";
 
-// Popup auto-open delay (ms)
-const POPUP_DELAY = 6000; // 6 seconds
+// Popup timing
+const POPUP_DELAY = 6000;         // ms before the popup opens
+const POPUP_COOLDOWN = 1000*60*60*24; // 24 hours
 
-// Popup repeat cooldown (ms) — 24 hours
-const POPUP_COOLDOWN = 1000 * 60 * 60 * 24;
-
-/* -------------------------
-  Utilities
-------------------------- */
-
-function showToast(text, timeout = 3500){
+/* ---------- HELPERS ---------- */
+function showToast(text, timeout = 3000){
   const t = document.getElementById("leadToast");
   t.innerText = text;
   t.classList.add("show");
@@ -299,100 +171,97 @@ function showToast(text, timeout = 3500){
   t._to = setTimeout(()=> t.classList.remove("show"), timeout);
 }
 
-/* -------------------------
-  Submit to Google Sheets (Apps Script)
-  Returns true if saved, false otherwise
-------------------------- */
-async function saveToSheet(payload, btnEl) {
+// returns boolean on success
+async function postToSheetBest(payload){
   try{
-    if(btnEl){ btnEl.disabled = true; btnEl.dataset.orig = btnEl.innerText; btnEl.innerText = "Saving..."; }
     const res = await fetch(ACTION_URL, {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
       cache: "no-store"
     });
     if(!res.ok){
-      throw new Error("Network response not ok");
-    }
-    const json = await res.json();
-    if(json && json.success) {
-      return true;
-    } else {
-      console.warn("AppsScript response:", json);
+      // try to parse error body (helpful during debugging)
+      let txt = await res.text();
+      console.warn("Sheet.best non-ok", res.status, txt);
       return false;
     }
+    const json = await res.json().catch(()=> null);
+    // sheet.best may return {} or created object — treat as success if status ok
+    return true;
   } catch(err){
-    console.error("saveToSheet error:", err);
+    console.error("postToSheetBest error:", err);
     return false;
-  } finally {
-    if(btnEl){ btnEl.disabled = false; btnEl.innerText = btnEl.dataset.orig || "Send Request"; }
   }
 }
 
-/* -------------------------
-  Open WhatsApp with prefilled message
-------------------------- */
-function openWhatsApp(payload){
-  const text = [
-    "New Lead from LeadX365",
+function openWhatsAppWithPayload(payload){
+  const lines = [
+    "New lead — LeadX365",
     "Source: " + (payload.source || "website"),
     "Name: " + (payload.name || "-"),
     "Phone: " + (payload.phone || "-"),
     "Email: " + (payload.email || "-"),
-    "Message: " + (payload.message || "-"),
-  ].join("\n");
-  const url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text);
-  // open in new tab (works on desktop & mobile)
+    "Message: " + (payload.message || "-")
+  ];
+  const url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
   window.open(url, "_blank");
 }
 
-/* -------------------------
-  Shared submit flow: Save -> Then WhatsApp (fallback to WhatsApp if save fails)
-------------------------- */
-async function handleSubmission(payload, btnEl){
-  // basic validation
+/* ---------- SHARED SUBMIT FLOW ---------- */
+async function handleSubmission(payload, btnEl, openWhatsappAfter = true){
   if(!payload.name || !payload.phone){
     showToast("Please enter name & phone.");
     return;
   }
 
-  showToast("Processing...");
+  if(btnEl){ btnEl.disabled = true; btnEl.dataset.orig = btnEl.innerText; btnEl.innerText = "Sending..."; }
+  showToast("Saving lead...");
 
-  const saved = await saveToSheet(payload, btnEl);
+  const saved = await postToSheetBest(payload);
 
   if(saved){
     showToast("Saved — opening WhatsApp...");
-    // slight delay so toast is visible
-    setTimeout(()=> openWhatsApp(payload), 700);
   } else {
     showToast("Could not save — opening WhatsApp anyway.");
-    // still open WhatsApp so lead isn't lost
-    setTimeout(()=> openWhatsApp(payload), 700);
   }
+
+  if(openWhatsappAfter){
+    setTimeout(()=> openWhatsAppWithPayload(payload), 700);
+  }
+
+  if(btnEl){ btnEl.disabled = false; btnEl.innerText = btnEl.dataset.orig || "Send Request"; }
+  return saved;
 }
 
-/* -------------------------
-  DOM ready: wire forms, popup, animations
-------------------------- */
+/* ---------- POPUP + USER-TYPING HANDLING ---------- */
 document.addEventListener("DOMContentLoaded", function(){
 
-  // Set year
-  const y = document.getElementById("year");
-  if(y) y.innerText = new Date().getFullYear();
+  document.getElementById("year").innerText = new Date().getFullYear();
 
-  // Reveal animations
+  // animation trigger (kept minimal)
   const reveals = document.querySelectorAll(".reveal");
   const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add("in"); }
-    });
-  },{threshold:.15});
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("in"); });
+  },{threshold:0.15});
   reveals.forEach(r=>obs.observe(r));
 
-  // MAIN FORM
+  // track if user is typing / focused on input anywhere
+  let userTyping = false;
+  const inputs = Array.from(document.querySelectorAll("input, textarea, [contenteditable='true']"));
+  inputs.forEach(i=>{
+    i.addEventListener("focus", ()=> userTyping = true);
+    i.addEventListener("keydown", ()=> userTyping = true);
+    i.addEventListener("blur", ()=> {
+      // small delay to avoid race with opening
+      setTimeout(()=> userTyping = false, 100);
+    });
+  });
+
+  // form (main)
   const leadForm = document.getElementById("lead-form");
   const sendBtn = document.getElementById("sendBtn");
+  const waBtn = document.getElementById("waBtn");
   if(sendBtn) sendBtn.dataset.orig = sendBtn.innerText;
 
   leadForm.addEventListener("submit", async function(e){
@@ -405,13 +274,11 @@ document.addEventListener("DOMContentLoaded", function(){
       message: document.getElementById("message").value.trim(),
       ts: new Date().toISOString()
     };
-    await handleSubmission(payload, sendBtn);
-    // keep form filled so user sees the values before WhatsApp; optional: reset
-    // leadForm.reset();
+    await handleSubmission(payload, sendBtn, true);
+    // keep values visible (so user can confirm WhatsApp)
   });
 
-  // Quick WA button in-form (without saving)
-  const waBtn = document.getElementById("waBtn");
+  // quick WA without saving
   waBtn.addEventListener("click", function(){
     const payload = {
       source: "website_wa_quick",
@@ -421,13 +288,10 @@ document.addEventListener("DOMContentLoaded", function(){
       message: document.getElementById("message").value.trim(),
       ts: new Date().toISOString()
     };
-    // Open direct WhatsApp (no save)
-    openWhatsApp(payload);
+    openWhatsAppWithPayload(payload);
   });
 
-  /* -------------------------
-    POPUP logic
-  ------------------------- */
+  // Popup DOM
   const popupBackdrop = document.getElementById("leadPopupBackdrop");
   const popup = document.getElementById("leadPopup");
   const popupClose = document.getElementById("popupClose");
@@ -437,13 +301,19 @@ document.addEventListener("DOMContentLoaded", function(){
   popupSend.dataset.orig = popupSend.innerText;
 
   function openPopup(){
+    // do not open if user is typing
+    if(userTyping) {
+      // try again in 3s (will still respect cooldown)
+      setTimeout(()=> attemptOpenPopup(), 3000);
+      return;
+    }
     popupBackdrop.classList.add("open");
     popup.classList.add("open");
     popupBackdrop.setAttribute("aria-hidden","false");
     setTimeout(()=> {
       const el = document.getElementById("popup-name");
       if(el) el.focus();
-    }, 180);
+    }, 200);
   }
   function closePopup(){
     popupBackdrop.classList.remove("open");
@@ -451,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function(){
     popupBackdrop.setAttribute("aria-hidden","true");
   }
 
-  popupClose.addEventListener("click", function(){ 
+  popupClose.addEventListener("click", function(){
     closePopup();
     localStorage.setItem("leadx_popup_shown", Date.now().toString());
   });
@@ -462,6 +332,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   popupForm.addEventListener("submit", async function(e){
     e.preventDefault();
+    popupSend.disabled = true;
     const payload = {
       source: "popup",
       name: document.getElementById("popup-name").value.trim(),
@@ -470,30 +341,17 @@ document.addEventListener("DOMContentLoaded", function(){
       message: document.getElementById("popup-message").value.trim(),
       ts: new Date().toISOString()
     };
-
-    // use same flow: save then whatsapp
-    await handleSubmission(payload, popupSend);
-    // close popup after short delay
+    await handleSubmission(payload, popupSend, true);
+    // close and set cooldown
     setTimeout(()=> {
+      popupForm.reset();
       closePopup();
       localStorage.setItem("leadx_popup_shown", Date.now().toString());
-      // optional: reset
-      popupForm.reset();
-    }, 800);
+      popupSend.disabled = false;
+    }, 600);
   });
 
-  // Auto-open logic: only if not shown in last 24h
-  try {
-    const last = parseInt(localStorage.getItem("leadx_popup_shown") || "0", 10);
-    const now = Date.now();
-    if(isNaN(last) || (now - last) > POPUP_COOLDOWN){
-      setTimeout(()=> openPopup(), POPUP_DELAY);
-    }
-  } catch(err){
-    setTimeout(()=> openPopup(), POPUP_DELAY);
-  }
-
-  // Close on backdrop click
+  // close on backdrop click
   popupBackdrop.addEventListener("click", function(e){
     if(e.target === popupBackdrop){
       closePopup();
@@ -501,27 +359,47 @@ document.addEventListener("DOMContentLoaded", function(){
     }
   });
 
-  // ESC closes popup
+  // escape key
   document.addEventListener("keydown", function(e){
-    if(e.key === "Escape"){
+    if(e.key === "Escape" && popupBackdrop.classList.contains("open")){
+      closePopup();
+      localStorage.setItem("leadx_popup_shown", Date.now().toString());
+    }
+  });
+
+  // Decide to show popup (respect cooldown)
+  function attemptOpenPopup(){
+    try{
+      const last = parseInt(localStorage.getItem("leadx_popup_shown") || "0", 10);
+      const now = Date.now();
+      if(isNaN(last) || (now - last) > POPUP_COOLDOWN){
+        openPopup();
+      } else {
+        // cooldown active; do not open
+        console.log("Popup cooldown active.");
+      }
+    } catch(err){
+      // if localStorage blocked, just open once after delay
+      openPopup();
+    }
+  }
+
+  // schedule popup after delay but check typing and cooldown when triggered
+  setTimeout(()=> attemptOpenPopup(), POPUP_DELAY);
+
+  // also avoid popup if user focuses form inputs on page (so no surprise while typing)
+  const pageInputs = document.querySelectorAll("input, textarea");
+  pageInputs.forEach(i=>{
+    i.addEventListener("focus", ()=> {
+      // if popup open, close; set cooldown so it won't reopen immediately
       if(popupBackdrop.classList.contains("open")){
         closePopup();
         localStorage.setItem("leadx_popup_shown", Date.now().toString());
       }
-    }
+    });
   });
 
-  // Hero CTA smooth scroll
-  const heroCta = document.getElementById("hero-cta");
-  if(heroCta){
-    heroCta.addEventListener("click", function(e){
-      e.preventDefault();
-      document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
-    });
-  }
-
-}); // DOMContentLoaded
+}); // DOM ready
 </script>
-
 </body>
 </html>
