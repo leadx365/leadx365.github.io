@@ -278,9 +278,6 @@
 // Your Google Apps Script web app /exec URL (already deployed)
 const ACTION_URL = "https://script.google.com/macros/s/AKfycbxa2rVhKHenxqSPHld3u2WPmBufjj4cXA5zo9DbnLmXVgAWBlUFVDjgcgvsBsdtBqJd/exec";
 
-// WhatsApp number (international format, no +)
-const WA_NUMBER = "919000810084";
-
 // Popup auto-open delay (ms)
 const POPUP_DELAY = 6000; // 6 seconds
 
@@ -300,30 +297,40 @@ function showToast(text, timeout = 3500){
 }
 
 /* -------------------------
-  Submit to Google Sheets (Apps Script)
-  Returns true if saved, false otherwise
+  Form submission (shared)
 ------------------------- */
-async function saveToSheet(payload, btnEl) {
+
+async function submitLead(payload, btnEl, showSuccessMsg = true){
+  if(!payload.name || !payload.phone){
+    showToast("Please enter name & phone.");
+    return false;
+  }
+
   try{
-    if(btnEl){ btnEl.disabled = true; btnEl.dataset.orig = btnEl.innerText; btnEl.innerText = "Saving..."; }
+    if(btnEl) { btnEl.disabled = true; btnEl.innerText = "Sending..."; }
+
     const res = await fetch(ACTION_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(payload),
       cache: "no-store"
     });
+
     if(!res.ok){
-      throw new Error("Network response not ok");
+      throw new Error("Network response was not ok");
     }
+
     const json = await res.json();
-    if(json && json.success) {
+    if(json && json.success){
+      if(showSuccessMsg) showToast("Thanks — we received your request!");
       return true;
     } else {
-      console.warn("AppsScript response:", json);
-      return false;
+      throw new Error(json && json.message ? json.message : "Save failed");
     }
+
   } catch(err){
-    console.error("saveToSheet error:", err);
+    console.error("submitLead error:", err);
+    showToast("Failed to send — please WhatsApp us directly.");
     return false;
   } finally {
     if(btnEl){ btnEl.disabled = false; btnEl.innerText = btnEl.dataset.orig || "Send Request"; }
@@ -331,56 +338,10 @@ async function saveToSheet(payload, btnEl) {
 }
 
 /* -------------------------
-  Open WhatsApp with prefilled message
+  Main form handler
 ------------------------- */
-function openWhatsApp(payload){
-  const text = [
-    "New Lead from LeadX365",
-    "Source: " + (payload.source || "website"),
-    "Name: " + (payload.name || "-"),
-    "Phone: " + (payload.phone || "-"),
-    "Email: " + (payload.email || "-"),
-    "Message: " + (payload.message || "-"),
-  ].join("\n");
-  const url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text);
-  // open in new tab (works on desktop & mobile)
-  window.open(url, "_blank");
-}
 
-/* -------------------------
-  Shared submit flow: Save -> Then WhatsApp (fallback to WhatsApp if save fails)
-------------------------- */
-async function handleSubmission(payload, btnEl){
-  // basic validation
-  if(!payload.name || !payload.phone){
-    showToast("Please enter name & phone.");
-    return;
-  }
-
-  showToast("Processing...");
-
-  const saved = await saveToSheet(payload, btnEl);
-
-  if(saved){
-    showToast("Saved — opening WhatsApp...");
-    // slight delay so toast is visible
-    setTimeout(()=> openWhatsApp(payload), 700);
-  } else {
-    showToast("Could not save — opening WhatsApp anyway.");
-    // still open WhatsApp so lead isn't lost
-    setTimeout(()=> openWhatsApp(payload), 700);
-  }
-}
-
-/* -------------------------
-  DOM ready: wire forms, popup, animations
-------------------------- */
 document.addEventListener("DOMContentLoaded", function(){
-
-  // Set year
-  const y = document.getElementById("year");
-  if(y) y.innerText = new Date().getFullYear();
-
   // Reveal animations
   const reveals = document.querySelectorAll(".reveal");
   const obs = new IntersectionObserver(entries=>{
@@ -390,7 +351,9 @@ document.addEventListener("DOMContentLoaded", function(){
   },{threshold:.15});
   reveals.forEach(r=>obs.observe(r));
 
-  // MAIN FORM
+  document.getElementById("year").innerText = new Date().getFullYear();
+
+  // Main form
   const leadForm = document.getElementById("lead-form");
   const sendBtn = document.getElementById("sendBtn");
   if(sendBtn) sendBtn.dataset.orig = sendBtn.innerText;
@@ -405,28 +368,23 @@ document.addEventListener("DOMContentLoaded", function(){
       message: document.getElementById("message").value.trim(),
       ts: new Date().toISOString()
     };
-    await handleSubmission(payload, sendBtn);
-    // keep form filled so user sees the values before WhatsApp; optional: reset
-    // leadForm.reset();
+
+    const ok = await submitLead(payload, sendBtn, true);
+    if(ok){
+      leadForm.reset();
+    }
   });
 
-  // Quick WA button in-form (without saving)
+  // WhatsApp button inside form
   const waBtn = document.getElementById("waBtn");
   waBtn.addEventListener("click", function(){
-    const payload = {
-      source: "website_wa_quick",
-      name: document.getElementById("name").value.trim(),
-      phone: document.getElementById("phone").value.trim(),
-      email: document.getElementById("email").value.trim(),
-      message: document.getElementById("message").value.trim(),
-      ts: new Date().toISOString()
-    };
-    // Open direct WhatsApp (no save)
-    openWhatsApp(payload);
+    const name = document.getElementById("name").value || "";
+    const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
+    window.open("https://wa.me/919000810084?text="+msg, "_blank");
   });
 
   /* -------------------------
-    POPUP logic
+    Popup logic
   ------------------------- */
   const popupBackdrop = document.getElementById("leadPopupBackdrop");
   const popup = document.getElementById("leadPopup");
@@ -440,10 +398,8 @@ document.addEventListener("DOMContentLoaded", function(){
     popupBackdrop.classList.add("open");
     popup.classList.add("open");
     popupBackdrop.setAttribute("aria-hidden","false");
-    setTimeout(()=> {
-      const el = document.getElementById("popup-name");
-      if(el) el.focus();
-    }, 180);
+    // focus first field
+    setTimeout(()=> document.getElementById("popup-name").focus(), 200);
   }
   function closePopup(){
     popupBackdrop.classList.remove("open");
@@ -471,12 +427,56 @@ document.addEventListener("DOMContentLoaded", function(){
       ts: new Date().toISOString()
     };
 
-    // use same flow: save then whatsapp
-    await handleSubmission(payload, popupSend);
-    // close popup after short delay
-    setTimeout(()=> {
+    const ok = await submitLead(payload, popupSend, true);
+    if(ok){
+      popupForm.reset();
+      closePopup();
+      // Save cooldown for 24h
+      localStorage.setItem("leadx_popup_shown", Date.now().toString());
+    }
+  });
+
+  // Auto-open logic: only if not shown in last 24h
+  try {
+    const last = parseInt(localStorage.getItem("leadx_popup_shown") || "0", 10);
+    const now = Date.now();
+    if(isNaN(last) || (now - last) > POPUP_COOLDOWN){
+      setTimeout(()=> openPopup(), POPUP_DELAY);
+    }
+  } catch(err){
+    // localStorage blocked, just open once after delay
+    setTimeout(()=> openPopup(), POPUP_DELAY);
+  }
+
+  // Close on backdrop click
+  popupBackdrop.addEventListener("click", function(e){
+    if(e.target === popupBackdrop){
       closePopup();
       localStorage.setItem("leadx_popup_shown", Date.now().toString());
-      // optional: reset
-      popupForm.reset();
-    }, 800);
+    }
+  });
+
+  // Accessibility: ESC closes popup
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+      if(popupBackdrop.classList.contains("open")){
+        closePopup();
+        localStorage.setItem("leadx_popup_shown", Date.now().toString());
+      }
+    }
+  });
+
+  // Hero CTA smooth scroll
+  const heroCta = document.getElementById("hero-cta");
+  if(heroCta){
+    heroCta.addEventListener("click", function(e){
+      e.preventDefault();
+      document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
+    });
+  }
+
+}); // domContentLoaded
+</script>
+
+</body>
+</html>
