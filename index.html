@@ -72,22 +72,36 @@
       text-align:center;color:#fff;
       background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
       box-shadow:0 14px 32px rgba(37,117,252,0.18);
-      position: relative; /* AI ADDED */
-      overflow: hidden;   /* AI ADDED */
+      position: relative;
+      overflow: hidden;
     }
 
-    /* AI HERO BACKGROUND OVERLAY — OPTION B */
-    .hero::after{
-      content:"";
-      position:absolute;
-      top:-20px;
-      right:-40px;
-      width:420px;
-      height:420px;
-      background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;
-      opacity:0.12; /* soft, premium */
-      pointer-events:none;
-      z-index:1;
+    /* ⭐ FIXED HERO IMAGE BLEND — PERFECT DESKTOP VERSION */
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -40px;     /* down for better blend */
+      right: -120px;     /* move right */
+      width: 380px;      /* perfect size */
+      height: 380px;
+      background: url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png")
+                  no-repeat center/contain;
+      opacity: 0.10;     /* lighter */
+      pointer-events: none;
+      mix-blend-mode: soft-light; /* MAGIC FIX */
+      z-index: 1;
+    }
+
+    /* 📱 MOBILE FIX — smaller, softer, more right */
+    @media(max-width:700px){
+      .hero::after {
+        bottom: -20px;
+        right: -130px;
+        width: 230px;
+        height: 230px;
+        opacity: 0.08;
+        mix-blend-mode: soft-light;
+      }
     }
 
     .hero h1{font-size:30px;margin:0 0 6px}
@@ -150,13 +164,13 @@
     .reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}
     .reveal.in{opacity:1;transform:none}
 
-    /* AI FLOATING RIGHT SIDE — OPTION C */
+    /* FLOATING AI */
     .floating-ai{
       position:fixed;
       right:10px;
       bottom:30px;
       width:300px;
-      opacity:0.08; /* ultra light */
+      opacity:0.08;
       pointer-events:none;
       z-index:-1;
     }
@@ -164,7 +178,7 @@
     @media(max-width:700px){
       .menu{display:none}
       .brand h4{display:none}
-      .floating-ai{display:none;} /* hide on mobile for clean look */
+      .floating-ai{display:none;}
     }
   </style>
 </head>
@@ -288,6 +302,7 @@
         <li>AI-powered automation</li>
         <li>Zero manual work</li>
         <li>Affordable plans</li>
+
         <li>Works for all industries</li>
         <li>Proven results</li>
       </ul>
@@ -326,7 +341,7 @@
 
 </main>
 
-<!-- FLOATING AI IMAGE — OPTION C -->
+<!-- FLOATING AI IMAGE -->
 <img class="floating-ai"
      src="https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png"
      alt="AI Graphic">
@@ -353,10 +368,8 @@
 
   document.getElementById("hero-cta").addEventListener("click",e=>{
     e.preventDefault();
-    document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
-  });
-
-  document.getElementById("waBtn").addEventListener("click",function(){
+    document.queryבק�
+    document.getElementById("waBtn").addEventListener("click",function(){
     const name = document.getElementById("name").value || "";
     const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
     window.open("https://wa.me/919000810084?text="+msg, "_blank");
