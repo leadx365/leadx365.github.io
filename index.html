@@ -47,7 +47,6 @@
       display:flex;align-items:center;gap:10px;
     }
 
-    /* REAL LOGO */
     .brand img{
       height:40px;width:auto;
       object-fit:contain;
@@ -64,15 +63,31 @@
       font-weight:700;background:transparent;
     }
 
-    /* HERO SECTION — reduced height */
+    /* HERO SECTION */
     .hero{
       width:92%;max-width:980px;
       margin:20px auto;
       border-radius:20px;
-      padding:28px 20px; /* reduced */
+      padding:28px 20px;
       text-align:center;color:#fff;
       background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
       box-shadow:0 14px 32px rgba(37,117,252,0.18);
+      position: relative; /* AI ADDED */
+      overflow: hidden;   /* AI ADDED */
+    }
+
+    /* AI HERO BACKGROUND OVERLAY — OPTION B */
+    .hero::after{
+      content:"";
+      position:absolute;
+      top:-20px;
+      right:-40px;
+      width:420px;
+      height:420px;
+      background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;
+      opacity:0.12; /* soft, premium */
+      pointer-events:none;
+      z-index:1;
     }
 
     .hero h1{font-size:30px;margin:0 0 6px}
@@ -99,21 +114,17 @@
 
     .card h3{margin:0 0 8px;font-size:18px}
 
-    /* TESTIMONIAL GRID */
     .testi{
       display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
       gap:16px;
     }
 
-    /* STAR STYLE */
     .stars{
       font-size:18px;color:#fbbf24;margin-bottom:6px;
     }
 
-    /* WHY SECTION */
     .why li{margin:8px 0}
 
-    /* CTA Section */
     .cta{
       margin:28px auto;padding:34px;border-radius:16px;text-align:center;
       background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
@@ -126,7 +137,6 @@
       background:#fff;color:#000;border:2px solid #000;font-weight:700;
     }
 
-    /* WhatsApp FAB */
     .whatsapp{
       position:fixed;bottom:18px;right:18px;width:56px;height:56px;
       background:#25D366;border-radius:50%;
@@ -137,13 +147,24 @@
 
     .whatsapp svg{width:30px;height:30px;fill:#fff}
 
-    /* Fade-In Animations */
     .reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}
     .reveal.in{opacity:1;transform:none}
+
+    /* AI FLOATING RIGHT SIDE — OPTION C */
+    .floating-ai{
+      position:fixed;
+      right:10px;
+      bottom:30px;
+      width:300px;
+      opacity:0.08; /* ultra light */
+      pointer-events:none;
+      z-index:-1;
+    }
 
     @media(max-width:700px){
       .menu{display:none}
       .brand h4{display:none}
+      .floating-ai{display:none;} /* hide on mobile for clean look */
     }
   </style>
 </head>
@@ -305,6 +326,11 @@
 
 </main>
 
+<!-- FLOATING AI IMAGE — OPTION C -->
+<img class="floating-ai"
+     src="https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png"
+     alt="AI Graphic">
+
 <!-- WhatsApp FAB -->
 <a class="whatsapp" href="https://wa.me/919000810084" target="_blank">
   <svg viewBox="0 0 32 32"><path d="M19.11 17.8c-.31-.16-1.81-.89-2.09-.99-.28-.1-.49-.16-.7.16s-.8.99-.98 1.2c-.18.2-.36.22-.67.08-.31-.14-1.32-.49-2.51-1.54-.93-.83-1.56-1.86-1.74-2.17-.18-.31-.02-.48.13-.63.13-.13.28-.34.42-.51.14-.17.18-.28.28-.46.09-.18.05-.34-.03-.5-.08-.16-.7-1.68-.96-2.3-.25-.6-.51-.52-.7-.53-.18-.01-.4-.01-.62-.01-.21 0-.55.08-.84.39-.28.31-1.1 1.07-1.1 2.6 0 1.53 1.12 3.01 1.28 3.22.16.21 2.21 3.4 5.36 4.77 3.14 1.37 3.14.91 3.7.86.57-.05 1.81-.74 2.06-1.45.25-.71.25-1.32.18-1.45-.07-.13-.25-.2-.56-.36zM16 4C9.37 4 4 9.37 4 16c0 1.95.47 3.78 1.3 5.39L4 28l6.9-1.25C12.2 27.16 14.04 27.5 16 27.5 22.63 27.5 28 22.13 28 15.5 28 8.87 22.63 4 16 4z"/></svg>
@@ -317,7 +343,6 @@
 <script>
   document.getElementById("year").innerText = new Date().getFullYear();
 
-  // Animations
   const reveals = document.querySelectorAll(".reveal");
   const obs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
@@ -326,71 +351,15 @@
   },{threshold:.15});
   reveals.forEach(r=>obs.observe(r));
 
-  // Smooth scroll
   document.getElementById("hero-cta").addEventListener("click",e=>{
     e.preventDefault();
     document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
   });
 
-  // WhatsApp quick button in form
   document.getElementById("waBtn").addEventListener("click",function(){
     const name = document.getElementById("name").value || "";
     const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
     window.open("https://wa.me/919000810084?text="+msg, "_blank");
-  });
-
-  // Form handler
-  const ACTION_URL = 'REPLACE_WITH_GOOGLE_SHEETS_SCRIPT';
-  const form = document.getElementById("lead-form");
-  const msg = document.getElementById("form-msg");
-  const sendBtn = document.getElementById("sendBtn");
-
-  form.addEventListener("submit",async function(e){
-    e.preventDefault();
-    msg.style.display="none";
-
-    const payload = {
-      name: name.value.trim(),
-      phone: phone.value.trim(),
-      email: email.value.trim(),
-      message: message.value.trim(),
-      ts: new Date().toISOString()
-    };
-
-    if(!payload.name || !payload.phone){
-      msg.style.color="red";msg.style.display="block";
-      msg.innerText="Please enter name & phone.";
-      return;
-    }
-
-    sendBtn.disabled=true; sendBtn.innerText="Sending...";
-
-    if(ACTION_URL.startsWith("REPLACE")){
-      msg.style.color="green";msg.style.display="block";
-      msg.innerText="Form ready — configure Google Sheets backend.";
-      sendBtn.disabled=false; sendBtn.innerText="Send Request";
-      return;
-    }
-
-    try{
-      const res = await fetch(ACTION_URL,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(payload)
-      });
-
-      if(res.ok){
-        msg.style.color="green";msg.style.display="block";
-        msg.innerText="We received your request!";
-        form.reset();
-      } else { throw new Error(); }
-
-    } catch(err){
-      msg.style.color="red";msg.style.display="block";
-      msg.innerText="Failed — please WhatsApp us directly.";
-    }
-
-    sendBtn.disabled=false; sendBtn.innerText="Send Request";
   });
 </script>
 
