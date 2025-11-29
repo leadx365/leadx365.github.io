@@ -18,64 +18,157 @@
       --text: #0b0b0b;
       --muted: #666;
     }
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto;background:var(--bg);color:var(--text)}
+
+    html,body{
+      height:100%;margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+      background:var(--bg);color:var(--text);
+    }
+
     a{text-decoration:none;color:inherit}
-    .container{max-width:var(--max-w);margin:0 auto;padding:28px}
-    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,0.85);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,0.05)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;max-width:var(--max-w);margin:0 auto}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand img{height:40px;width:auto;object-fit:contain}
+
+    .container{max-width:var(--max-w);margin:0 auto;padding:28px;}
+
+    /* HEADER */
+    header{
+      position:sticky;top:0;z-index:30;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:10px 20px;max-width:var(--max-w);margin:0 auto;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:10px;
+    }
+
+    .brand img{
+      height:40px;width:auto;
+      object-fit:contain;
+    }
+
     .menu{display:flex;gap:18px;align-items:center}
     .menu a{padding:8px 6px;font-weight:600;opacity:0.9}
-    .btn-cta{border:2px solid #000;padding:8px 16px;border-radius:26px;font-weight:700;background:transparent}
-    .hero{width:92%;max-width:980px;margin:20px auto;border-radius:20px;padding:40px 20px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));box-shadow:0 14px 32px rgba(37,117,252,0.18);position:relative;overflow:hidden}
-    .hero::after{content:"";position:absolute;bottom:-40px;right:-140px;width:420px;height:420px;background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;opacity:0.12;mix-blend-mode:soft-light;pointer-events:none;z-index:1}
-    @media(max-width:700px){.hero::after{width:240px;height:240px;bottom:-10px;right:-90px;opacity:0.09}.menu{display:none}.brand h4{display:none}}
-    .hero h1{font-size:32px;margin:0 0 10px;font-weight:800}.hero p{margin:0 0 14px;color:#fff}.hero .btn{display:inline-block;background:#fff;color:#000;border:2px solid #000;padding:12px 24px;border-radius:28px;font-weight:700}
-    section{max-width:var(--max-w);margin:34px auto;padding:0 20px}h2{font-size:24px;margin:8px 0 16px;font-weight:800}
+
+    .btn-cta{
+      border:2px solid #000;padding:8px 16px;border-radius:26px;
+      font-weight:700;background:transparent;
+    }
+
+    /* HERO */
+    .hero{
+      width:92%;max-width:980px;
+      margin:20px auto;
+      border-radius:20px;
+      padding:40px 20px;
+      text-align:center;color:#fff;
+      background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
+      box-shadow:0 14px 32px rgba(37,117,252,0.18);
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* AI HEAD BLEND — best version */
+    .hero::after{
+      content:"";
+      position:absolute;
+      bottom:-40px;
+      right:-140px;
+      width:420px;
+      height:420px;
+      background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;
+      opacity:0.12;
+      mix-blend-mode:soft-light;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    /* Mobile hero image fix */
+    @media(max-width:700px){
+      .hero::after{
+        width:240px;
+        height:240px;
+        bottom:-10px;
+        right:-90px;
+        opacity:0.09;
+      }
+      .menu{display:none}
+      .brand h4{display:none}
+    }
+
+    .hero h1{font-size:32px;margin:0 0 10px;font-weight:800}
+    .hero p{margin:0 0 14px;color:#fff}
+    .hero .btn{
+      display:inline-block;background:#fff;color:#000;border:2px solid #000;
+      padding:12px 24px;border-radius:28px;font-weight:700;
+    }
+
+    section{max-width:var(--max-w);margin:34px auto;padding:0 20px}
+    h2{font-size:24px;margin:8px 0 16px;font-weight:800}
+
     p.lead{color:var(--muted);font-size:16px;margin-bottom:16px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-    .card{background:var(--card-bg);padding:20px;border-radius:var(--radius);box-shadow:0 6px 16px rgba(0,0,0,0.04)}
-    .card h3{margin:0 0 10px;font-size:18px}.card p{margin:0;color:var(--muted)}
-    .why-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .why-card{background:rgba(255,255,255,0.03);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(7,12,34,0.02);min-height:120px}
-    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
-    .feature{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:16px;border:1px solid rgba(0,0,0,0.03);min-height:110px}
-    .cta{margin:28px auto;padding:34px;border-radius:16px;text-align:center;background:linear-gradient(135deg,var(--accent-a),var(--accent-b));color:#fff}
-    .floating-ai{position:fixed;right:10px;bottom:20px;width:300px;opacity:0.07;pointer-events:none;z-index:-1}
-    @media(max-width:700px){.floating-ai{display:none}}
-    .reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}.reveal.in{opacity:1;transform:none}
-    .whatsapp{position:fixed;bottom:18px;right:18px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 10px 28px rgba(0,0,0,0.15);z-index:50}
+
+    .grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:var(--card-bg);padding:20px;border-radius:var(--radius);
+      box-shadow:0 6px 16px rgba(0,0,0,0.04);
+    }
+
+    .testi{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:16px;
+    }
+
+    .stars{font-size:18px;color:#fbbf24;margin-bottom:6px}
+
+    .cta{
+      margin:28px auto;padding:34px;border-radius:16px;text-align:center;
+      background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+      color:#fff;
+    }
+
+    .cta .btn{
+      display:inline-block;margin-top:14px;
+      padding:12px 22px;border-radius:28px;
+      background:#fff;color:#000;border:2px solid #000;font-weight:700;
+    }
+
+    /* Floating AI (desktop only) */
+    .floating-ai{
+      position:fixed;
+      right:10px;
+      bottom:20px;
+      width:300px;
+      opacity:0.07;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    @media(max-width:700px){
+      .floating-ai{display:none;}
+    }
+
+    /* Fade-in */
+    .reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    /* WhatsApp FAB */
+    .whatsapp{
+      position:fixed;bottom:18px;right:18px;width:56px;height:56px;
+      background:#25D366;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      border:4px solid #fff;box-shadow:0 10px 28px rgba(0,0,0,0.15);
+      z-index:50;
+    }
     .whatsapp svg{width:30px;height:30px;fill:#fff}
-
-    /* Popup */
-    .lead-popup {
-      position: fixed;
-      right: 22px;
-      bottom: 92px;
-      width: 320px;
-      max-width: calc(100% - 40px);
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(12,20,55,0.12);
-      padding: 16px;
-      z-index: 120;
-      display: none;
-    }
-    .lead-popup h4{margin:0 0 8px}
-    .lead-popup p{margin:0 0 10px;color:var(--muted)}
-    .lead-popup input{width:100%;padding:10px;margin-bottom:8px;border-radius:8px;border:1px solid #eee}
-    .lead-popup .row{display:flex;gap:8px}
-    .lead-popup .row input{flex:1}
-    .lead-popup .tiny{font-size:13px;color:var(--muted)}
-    .lead-popup .close-btn{position:absolute;top:8px;left:10px;border:none;background:transparent;font-weight:700;color:#666}
-    .lead-popup .submit{background:#2575fc;color:#fff;padding:10px 12px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
-    .lead-popup .later{background:transparent;border:1px solid #ddd;padding:8px;border-radius:10px;cursor:pointer}
-
-    /* small mobile adjustment so popup not cover CTA */
-    @media(max-width:420px){
-      .lead-popup{right:12px;width:280px;bottom:110px}
-    }
   </style>
 </head>
 
@@ -91,8 +184,6 @@
     <div class="menu">
       <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#why-automation">Why AI</a>
-      <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#faq">FAQ</a>
@@ -102,30 +193,23 @@
 </header>
 
 <main>
+
+  <!-- HERO -->
   <section class="hero reveal">
     <h1>Grow Your Business With AI 🚀</h1>
     <p>Generate more leads, automate your marketing, and scale effortlessly.</p>
     <a class="btn" href="#contact" id="hero-cta">Start Your Growth Journey</a>
   </section>
 
+  <!-- ABOUT -->
   <section id="about" class="reveal">
-    <div class="container"><h2>About LeadX365</h2><p class="lead">We help businesses grow using AI-powered tools, automation, and 24/7 workflows.</p></div>
-  </section>
-
-  <section id="why-automation" class="reveal">
     <div class="container">
-      <h2>Why AI Automation?</h2>
-      <p class="lead">AI automation reduces manual work, shortens response time, and helps convert more visitors into customers — reliably, 24/7.</p>
-
-      <div class="why-list" style="margin-top:12px;">
-        <div class="why-card"><h4>24/7 Lead Capture</h4><p>No missed opportunities — capture leads any time of day.</p></div>
-        <div class="why-card"><h4>Faster Follow-ups</h4><p>Automated replies & sequences that increase conversion rates.</p></div>
-        <div class="why-card"><h4>Lower Cost per Lead</h4><p>Reduce manual outreach and ad waste with precise targeting.</p></div>
-        <div class="why-card"><h4>Consistent Experience</h4><p>Every lead receives the same high-quality onboarding flow.</p></div>
-      </div>
+      <h2>About LeadX365</h2>
+      <p class="lead">We help businesses grow using AI-powered tools, automation, and 24/7 workflows.</p>
     </div>
   </section>
 
+  <!-- SERVICES -->
   <section id="services" class="reveal">
     <div class="container">
       <h2>Our Services</h2>
@@ -137,22 +221,7 @@
     </div>
   </section>
 
-  <section id="features" class="reveal">
-    <div class="container">
-      <h2>Automation Features</h2>
-      <p class="lead">Everything you need to build a reliable, low-touch sales engine.</p>
-
-      <div class="features-grid" style="margin-top:14px;">
-        <div class="feature"><h4>Auto Lead Capture</h4><p>Forms, landing pages & chat widgets that push leads directly to your pipeline.</p></div>
-        <div class="feature"><h4>WhatsApp Workflows</h4><p>Automated WhatsApp responses, reminders, and drip sequences.</p></div>
-        <div class="feature"><h4>Lead Scoring</h4><p>Prioritize hot leads with behaviour-based scoring and tags.</p></div>
-        <div class="feature"><h4>Scheduled Outreach</h4><p>Time-based follow-ups and reminders — hands-free.</p></div>
-        <div class="feature"><h4>Analytics & Reports</h4><p>Daily summaries and conversion insights to improve campaigns.</p></div>
-        <div class="feature"><h4>Integrations</h4><p>Connect to Google Sheets, Zapier, CRM systems & ad platforms.</p></div>
-      </div>
-    </div>
-  </section>
-
+  <!-- PRICING -->
   <section id="pricing" class="reveal">
     <div class="container">
       <h2>Our Pricing</h2>
@@ -164,6 +233,7 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
   <section id="testimonials" class="reveal">
     <div class="container">
       <h2>Testimonials</h2>
@@ -175,6 +245,7 @@
     </div>
   </section>
 
+  <!-- FAQ -->
   <section id="faq" class="reveal">
     <div class="container">
       <h2>FAQ</h2>
@@ -185,6 +256,21 @@
     </div>
   </section>
 
+  <!-- WHY -->
+  <section class="reveal">
+    <div class="container">
+      <h2>Why Choose Us?</h2>
+      <ul class="why">
+        <li>AI-powered automation</li>
+        <li>Zero manual work</li>
+        <li>Affordable plans</li>
+        <li>Works for all industries</li>
+        <li>Proven results</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
   <section id="contact" class="reveal">
     <div class="container">
       <h2>Ready to Grow? Let's Talk!</h2>
@@ -207,26 +293,14 @@
     </div>
   </section>
 
+  <!-- FINAL CTA -->
   <section class="cta reveal">
     <h2>Ready to Grow?</h2>
     <a class="btn" href="#contact">Get in Touch</a>
     <p class="contact">📞 +91 90008 10084<br>📧 leadx365official@gmail.com</p>
   </section>
-</main>
 
-<!-- Popup HTML -->
-<div class="lead-popup" id="leadPopup" aria-hidden="true">
-  <button class="close-btn" id="popupClose">✕</button>
-  <h4>Want a free AI audit?</h4>
-  <p class="tiny">Share name & WhatsApp — we'll message you.</p>
-  <input id="popupName" placeholder="Your name">
-  <input id="popupPhone" placeholder="Phone / WhatsApp">
-  <div style="display:flex;gap:8px">
-    <button class="submit" id="popupSubmit">Send</button>
-    <button class="later" id="popupLater">Later</button>
-  </div>
-  <p id="popupMsg" class="tiny" style="margin-top:8px;display:none"></p>
-</div>
+</main>
 
 <!-- FLOATING AI -->
 <img class="floating-ai" src="https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png" alt="AI Graphic">
@@ -241,154 +315,26 @@
 </footer>
 
 <script>
-/* ============================
-  IMPORTANT:
-  Replace ACTION_URL value with your Web App URL from Apps Script deployment
-  Example:
-  const ACTION_URL = "https://script.google.com/macros/s/AKfycb.../exec"
-============================ */
-const ACTION_URL = "REPLACE_WITH_WEB_APP_URL";
+  document.getElementById("year").innerText = new Date().getFullYear();
 
-document.getElementById("year").innerText = new Date().getFullYear();
-
-// Reveal animations
-const reveals = document.querySelectorAll(".reveal");
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); } });
-},{threshold:.15});
-reveals.forEach(r=>obs.observe(r));
-
-// smooth scroll
-document.getElementById("hero-cta").addEventListener("click",function(e){ e.preventDefault(); document.querySelector("#contact").scrollIntoView({behavior:"smooth"}); });
-
-// WhatsApp quick button in form
-document.getElementById("waBtn").addEventListener("click",function(){
-  const name = document.getElementById("name").value || "";
-  const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
-  window.open("https://wa.me/919000810084?text="+msg, "_blank");
-});
-
-/* ---------- Form submission (main form) ---------- */
-const form = document.getElementById("lead-form");
-const formMsg = document.getElementById("form-msg");
-const sendBtn = document.getElementById("sendBtn");
-
-form.addEventListener("submit", async function(e){
-  e.preventDefault();
-  formMsg.style.display = "none";
-
-  const payload = {
-    source: "main_form",
-    name: document.getElementById("name").value.trim(),
-    phone: document.getElementById("phone").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    message: document.getElementById("message").value.trim()
-  };
-
-  if(!payload.name || !payload.phone){
-    formMsg.style.color = "red"; formMsg.style.display = "block";
-    formMsg.innerText = "Please enter name & phone.";
-    return;
-  }
-
-  sendBtn.disabled = true; sendBtn.innerText = "Sending...";
-
-  if(ACTION_URL.startsWith("REPLACE")){
-    formMsg.style.color = "green"; formMsg.style.display = "block";
-    formMsg.innerText = "Form ready — configure Google Sheets backend.";
-    sendBtn.disabled = false; sendBtn.innerText = "Send Request";
-    return;
-  }
-
-  try {
-    const res = await fetch(ACTION_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+  const reveals = document.querySelectorAll(".reveal");
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add("in"); }
     });
-    const json = await res.json();
-    if(json && json.success){
-      formMsg.style.color = "green"; formMsg.style.display = "block";
-      formMsg.innerText = "We received your request!";
-      form.reset();
-    } else {
-      throw new Error(json && json.message ? json.message : "Save failed");
-    }
-  } catch (err) {
-    formMsg.style.color = "red"; formMsg.style.display = "block";
-    formMsg.innerText = "Failed — please WhatsApp us directly.";
-  }
+  },{threshold:.15});
+  reveals.forEach(r=>obs.observe(r));
 
-  sendBtn.disabled = false; sendBtn.innerText = "Send Request";
-});
+  document.getElementById("hero-cta").addEventListener("click",function(e){
+    e.preventDefault();
+    document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
+  });
 
-/* ---------- Popup logic ---------- */
-const popup = document.getElementById("leadPopup");
-const popupClose = document.getElementById("popupClose");
-const popupSubmit = document.getElementById("popupSubmit");
-const popupLater = document.getElementById("popupLater");
-const popupMsg = document.getElementById("popupMsg");
-
-function showPopup(){
-  if(localStorage.getItem("leadx_popup_shown")) return;
-  popup.style.display = "block";
-  popup.setAttribute("aria-hidden","false");
-}
-
-function hidePopup(){
-  popup.style.display = "none";
-  popup.setAttribute("aria-hidden","true");
-}
-
-// show after 6 seconds
-setTimeout(showPopup, 6000);
-
-popupClose.addEventListener("click", function(){ hidePopup(); localStorage.setItem("leadx_popup_shown", "1"); });
-popupLater.addEventListener("click", function(){ hidePopup(); localStorage.setItem("leadx_popup_shown", "1"); });
-
-popupSubmit.addEventListener("click", async function(){
-  const name = document.getElementById("popupName").value.trim();
-  const phone = document.getElementById("popupPhone").value.trim();
-
-  popupMsg.style.display = "none";
-  if(!name || !phone){
-    popupMsg.style.display = "block"; popupMsg.style.color = "red";
-    popupMsg.innerText = "Please enter name & phone.";
-    return;
-  }
-
-  if(ACTION_URL.startsWith("REPLACE")){
-    popupMsg.style.display = "block"; popupMsg.style.color = "green";
-    popupMsg.innerText = "Popup ready — configure Google Sheets backend.";
-    return;
-  }
-
-  popupSubmit.disabled = true; popupSubmit.innerText = "Sending...";
-
-  const payload = { source: "popup", name, phone, email: "", message: "Popup lead" };
-  try {
-    const res = await fetch(ACTION_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if(data && data.success){
-      popupMsg.style.display = "block"; popupMsg.style.color = "green";
-      popupMsg.innerText = "Thanks — we'll message you on WhatsApp.";
-      localStorage.setItem("leadx_popup_shown", "1");
-      setTimeout(hidePopup, 1400);
-      // optional: open whatsapp chat
-      window.open("https://wa.me/919000810084?text="+encodeURIComponent("Hi, I am interested. Name: "+name), "_blank");
-    } else {
-      throw new Error("Save failed");
-    }
-  } catch(err) {
-    popupMsg.style.display = "block"; popupMsg.style.color = "red";
-    popupMsg.innerText = "Failed — try WhatsApp directly.";
-  }
-  popupSubmit.disabled = false; popupSubmit.innerText = "Send";
-});
+  document.getElementById("waBtn").addEventListener("click",function(){
+    const name = document.getElementById("name").value || "";
+    const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
+    window.open("https://wa.me/919000810084?text="+msg, "_blank");
+  });
 </script>
 
 </body>
