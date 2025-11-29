@@ -417,7 +417,7 @@
   const msg = document.getElementById("form-msg");
   const sendBtn = document.getElementById("sendBtn");
   
-  // Get input elements
+  // Get input elements by their IDs
   const nameInput = document.getElementById("name");
   const phoneInput = document.getElementById("phone");
   const emailInput = document.getElementById("email");
@@ -428,14 +428,15 @@
     e.preventDefault(); // CRITICAL: Stops the page from redirecting/reloading
     msg.style.display="none";
 
+    // **UPDATED PAYLOAD:** Keys now match your Google Sheet headers (Timestamp, Name, Phone, Email, Message)
     const payload = {
-      // Sheetbest requires the data object to be wrapped
-      data: {
+      data: { 
+        Timestamp: new Date().toISOString(), // Mismatched header fixed: 'ts' -> 'Timestamp'
+        Source: "Website Form", // Adding the 'Source' field 
         name: nameInput.value.trim(),
         phone: phoneInput.value.trim(),
         email: emailInput.value.trim(),
-        message: messageInput.value.trim(),
-        ts: new Date().toISOString()
+        message: messageInput.value.trim()
       }
     };
 
@@ -462,14 +463,19 @@
         form.reset(); // Clears the form fields
       } else { 
         // Handle API errors
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Sheetbest Error"); 
+        let errorMessage = "Sheetbest failed to process the request (Status: " + res.status + ").";
+        try {
+            const errorData = await res.json();
+            errorMessage = errorData.message || errorMessage;
+        } catch(e) {}
+
+        throw new Error(errorMessage); 
       }
 
     } catch(err){
       console.error("Submission Error:", err);
       msg.style.color="red";msg.style.display="block";
-      msg.innerText="Submission Failed — please WhatsApp us directly.";
+      msg.innerText="Submission Failed — please WhatsApp us directly."; 
     }
 
     sendBtn.disabled=false; sendBtn.innerText="Send Request";
