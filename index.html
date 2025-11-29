@@ -404,9 +404,11 @@
   // --- CORE VARS AND FUNCTIONS ---
   document.getElementById("year").innerText = new Date().getFullYear();
 
+  // *** USE YOUR CORRECT, DEPLOYED GOOGLE APPS SCRIPT URL HERE ***
   const ACTION_URL = "https://script.google.com/macros/s/AKfycbxKyB-0YtDERz4UG3xZdZTGTAJpDxteHHEo4qYWhsT5AYxvewG8EHd/exec"; 
+  
   const form = document.getElementById("lead-form");
-  const msgEl = document.getElementById("form-msg"); // Renamed to msgEl for clarity
+  const msgEl = document.getElementById("form-msg");
   
   // Custom Toast function to display messages
   function showToast(message, duration = 2000, isError = false) {
@@ -414,7 +416,7 @@
     
     msgEl.innerText = message;
     msgEl.style.display = 'block';
-    msgEl.className = isError ? 'toast error' : 'toast'; // Using 'toast' class defined in style
+    msgEl.className = isError ? 'toast error' : 'toast';
     
     // Set fixed position styles for toast
     msgEl.style.position = 'fixed';
@@ -457,12 +459,12 @@
     window.open("https://wa.me/919000810084?text="+msg, "_blank");
   });
 
-  // --- CORE SUBMISSION LOGIC (Your Provided Function) ---
+  // --- CORE SUBMISSION LOGIC (Corrected Version) ---
 
   async function handleSubmission(payload, btnEl, openWhatsappAfter = false){
-    // Validation Check
-    if(!payload.name || !payload.phone){
-      showToast("Please enter name & phone.", 3000, true); // Added isError = true
+    // Validation Check (Name/Phone keys are used from the form input, which are lowercase)
+    if(!payload.name || !payload.phone){ 
+      showToast("Please enter name & phone.", 3000, true);
       return;
     }
 
@@ -474,17 +476,19 @@
 
     showToast("Saving lead...");
 
-    // Convert field names to match your Google Sheet EXACTLY (Timestamp, Source, Name, Phone, Email, Message)
+    // *** CRITICAL CORRECTION: Added the 'data' wrapper required by Apps Script ***
     const sheetPayload = {
-      data: { // Apps Script requires the data wrapper
+      data: { 
+          // Keys here MUST match your Google Sheet headers: Timestamp, Source, Name, Phone, Email, Message
           "Timestamp": new Date().toISOString(),
-          "Source": "Website Form", // Constant source value
-          "Name": payload.name, // Corrected from payload.name to match input element key
-          "Phone": payload.phone, // Corrected from payload.phone to match input element key
+          "Source": "Website Form", 
+          "Name": payload.name, 
+          "Phone": payload.phone, 
           "Email": payload.email,
           "Message": payload.message
       }
     };
+    // *** END CORRECTION ***
 
     try {
       const res = await fetch(ACTION_URL, {
@@ -493,26 +497,29 @@
         body: JSON.stringify(sheetPayload)
       });
       
+      // Apps Script typically returns a 200 OK, but we must check the JSON response
       if(res.ok){
         const result = await res.json();
-        if(result.result === "success"){
+        
+        // The Apps Script returns {result: "success"} on success
+        if(result.result === "success"){ 
             showToast("✓ Submitted! We will contact you shortly.", 3000);
             form.reset(); // Clear the form on success
             if(openWhatsappAfter) { 
-               // Logic to open WhatsApp after success, if needed 
+               // Logic to open WhatsApp after success
             }
         } else {
-            // Handle error response from Apps Script script (e.g., if script code failed internally)
+            // Handle error response from Apps Script script
              throw new Error(result.message || "Apps Script rejected the data.");
         }
       } else {
-        // Handle non-200 HTTP status (e.g., 404, 500)
-        showToast(`Error: Status ${res.status}. Check your network.`, 3000, true);
+        // Handle non-200 HTTP status (e.g., 403 Forbidden due to bad deployment settings)
+        showToast(`Error: Status ${res.status}. Check deployment access.`, 3000, true);
         throw new Error(`HTTP Error: ${res.status}`);
       }
     } catch (err) {
       console.error("Submission Error:", err);
-      // Fallback error message (the one requested by the user)
+      // Fallback error message
       showToast("Submission Failed — please WhatsApp us directly.", 5000, true);
     }
 
@@ -529,7 +536,7 @@
     
     const sendBtn = document.getElementById("sendBtn");
 
-    // Gather input data
+    // Gather input data from the form fields
     const payload = {
         name: document.getElementById("name").value.trim(),
         phone: document.getElementById("phone").value.trim(),
@@ -538,7 +545,7 @@
     };
     
     // Call the core submission handler
-    handleSubmission(payload, sendBtn, false); // openWhatsappAfter set to false by default
+    handleSubmission(payload, sendBtn, false);
   });
 </script>
 
