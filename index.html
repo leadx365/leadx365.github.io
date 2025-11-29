@@ -195,6 +195,23 @@
       z-index:50;
     }
     .whatsapp svg{width:30px;height:30px;fill:#fff}
+
+    /* Toast styling for showToast function */
+    #form-msg.toast {
+        background: #333;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        position: fixed;
+        bottom: 70px; /* Above the FAB */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        font-weight: 500;
+        min-width: 250px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 
@@ -359,7 +376,7 @@
           <button id="sendBtn" type="submit" class="btn-cta" style="cursor:pointer;margin-right:10px">Send Request</button>
           <button id="waBtn" type="button" class="btn-cta" style="border-color:#25D366;color:#25D366">WhatsApp</button>
 
-          <p id="form-msg" style="display:none;margin-top:10px;font-weight:700"></p>
+          <p id="form-msg" style="display:none;"></p>
         </form>
       </div>
     </div>
@@ -384,10 +401,42 @@
 </footer>
 
 <script>
-  // year
+  // --- CORE VARS AND FUNCTIONS ---
   document.getElementById("year").innerText = new Date().getFullYear();
 
-  // Animations
+  const ACTION_URL = "https://script.google.com/macros/s/AKfycbxKyB-0YtDERz4UG3xZdZTGTAJpDxteHHEo4qYWhsT5AYxvewG8EHd/exec"; 
+  const form = document.getElementById("lead-form");
+  const msgEl = document.getElementById("form-msg"); // Renamed to msgEl for clarity
+  
+  // Custom Toast function to display messages
+  function showToast(message, duration = 2000, isError = false) {
+    clearTimeout(msgEl.timeoutId);
+    
+    msgEl.innerText = message;
+    msgEl.style.display = 'block';
+    msgEl.className = isError ? 'toast error' : 'toast'; // Using 'toast' class defined in style
+    
+    // Set fixed position styles for toast
+    msgEl.style.position = 'fixed';
+    msgEl.style.bottom = '70px'; 
+    msgEl.style.left = '50%'; 
+    msgEl.style.transform = 'translateX(-50%)'; 
+    msgEl.style.backgroundColor = isError ? 'red' : '#333';
+    msgEl.style.color = 'white';
+
+    msgEl.timeoutId = setTimeout(() => {
+      msgEl.style.display = 'none';
+      msgEl.className = '';
+      msgEl.style.removeProperty('position');
+      msgEl.style.removeProperty('bottom');
+      msgEl.style.removeProperty('left');
+      msgEl.style.removeProperty('transform');
+      msgEl.style.removeProperty('backgroundColor');
+      msgEl.style.removeProperty('color');
+    }, duration);
+  }
+
+  // --- ANIMATIONS AND SCROLLING ---
   const reveals = document.querySelectorAll(".reveal");
   const obs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
@@ -396,89 +445,100 @@
   },{threshold:.15});
   reveals.forEach(r=>obs.observe(r));
 
-  // Smooth scroll
   document.getElementById("hero-cta").addEventListener("click",function(e){
     e.preventDefault();
     document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
   });
 
-  // WhatsApp quick button in form
+  // --- WHATSAPP FUNCTIONALITY ---
   document.getElementById("waBtn").addEventListener("click",function(){
     const name = document.getElementById("name").value || "";
     const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
     window.open("https://wa.me/919000810084?text="+msg, "_blank");
   });
 
-  // --- Sheetbest Form Handler ---
+  // --- CORE SUBMISSION LOGIC (Your Provided Function) ---
 
-  // 1. Sheetbest URL
-  const ACTION_URL = "https://api.sheetbest.com/sheets/b256dccd-daeb-4a1d-ba8b-68dbb1caf3b0";
-  const form = document.getElementById("lead-form");
-  const msg = document.getElementById("form-msg");
-  const sendBtn = document.getElementById("sendBtn");
-  
-  // Get input elements by their IDs
-  const nameInput = document.getElementById("name");
-  const phoneInput = document.getElementById("phone");
-  const emailInput = document.getElementById("email");
-  const messageInput = document.getElementById("message");
-
-  // 2. Form Handler
-  form.addEventListener("submit",async function(e){
-    e.preventDefault(); // CRITICAL: Stops the page from redirecting/reloading
-    msg.style.display="none";
-
-    // **UPDATED PAYLOAD:** Keys now match your Google Sheet headers (Timestamp, Name, Phone, Email, Message)
-    const payload = {
-      data: { 
-        Timestamp: new Date().toISOString(), // Mismatched header fixed: 'ts' -> 'Timestamp'
-        Source: "Website Form", // Adding the 'Source' field 
-        name: nameInput.value.trim(),
-        phone: phoneInput.value.trim(),
-        email: emailInput.value.trim(),
-        message: messageInput.value.trim()
-      }
-    };
-
-    if(!payload.data.name || !payload.data.phone){
-      msg.style.color="red";msg.style.display="block";
-      msg.innerText="Please enter name & phone.";
+  async function handleSubmission(payload, btnEl, openWhatsappAfter = false){
+    // Validation Check
+    if(!payload.name || !payload.phone){
+      showToast("Please enter name & phone.", 3000, true); // Added isError = true
       return;
     }
 
-    sendBtn.disabled=true; sendBtn.innerText="Sending...";
-
-    try{
-      const res = await fetch(ACTION_URL,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(payload)
-      });
-
-      // Check for success status (200-299)
-      if(res.ok){
-        msg.style.color="green";msg.style.display="block";
-        // SUCCESS MESSAGE
-        msg.innerText="Submitted! We received your request and will contact you shortly. ✅";
-        form.reset(); // Clears the form fields
-      } else { 
-        // Handle API errors
-        let errorMessage = "Sheetbest failed to process the request (Status: " + res.status + ").";
-        try {
-            const errorData = await res.json();
-            errorMessage = errorData.message || errorMessage;
-        } catch(e) {}
-
-        throw new Error(errorMessage); 
-      }
-
-    } catch(err){
-      console.error("Submission Error:", err);
-      msg.style.color="red";msg.style.display="block";
-      msg.innerText="Submission Failed — please WhatsApp us directly."; 
+    if(btnEl){ 
+      btnEl.disabled = true; 
+      btnEl.dataset.orig = btnEl.innerText; 
+      btnEl.innerText = "Saving..."; 
     }
 
-    sendBtn.disabled=false; sendBtn.innerText="Send Request";
+    showToast("Saving lead...");
+
+    // Convert field names to match your Google Sheet EXACTLY (Timestamp, Source, Name, Phone, Email, Message)
+    const sheetPayload = {
+      data: { // Apps Script requires the data wrapper
+          "Timestamp": new Date().toISOString(),
+          "Source": "Website Form", // Constant source value
+          "Name": payload.name, // Corrected from payload.name to match input element key
+          "Phone": payload.phone, // Corrected from payload.phone to match input element key
+          "Email": payload.email,
+          "Message": payload.message
+      }
+    };
+
+    try {
+      const res = await fetch(ACTION_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(sheetPayload)
+      });
+      
+      if(res.ok){
+        const result = await res.json();
+        if(result.result === "success"){
+            showToast("✓ Submitted! We will contact you shortly.", 3000);
+            form.reset(); // Clear the form on success
+            if(openWhatsappAfter) { 
+               // Logic to open WhatsApp after success, if needed 
+            }
+        } else {
+            // Handle error response from Apps Script script (e.g., if script code failed internally)
+             throw new Error(result.message || "Apps Script rejected the data.");
+        }
+      } else {
+        // Handle non-200 HTTP status (e.g., 404, 500)
+        showToast(`Error: Status ${res.status}. Check your network.`, 3000, true);
+        throw new Error(`HTTP Error: ${res.status}`);
+      }
+    } catch (err) {
+      console.error("Submission Error:", err);
+      // Fallback error message (the one requested by the user)
+      showToast("Submission Failed — please WhatsApp us directly.", 5000, true);
+    }
+
+    if(btnEl){ 
+      btnEl.disabled = false; 
+      btnEl.innerText = btnEl.dataset.orig || "Send Request"; 
+    }
+  }
+
+
+  // --- MAIN FORM LISTENER ---
+  form.addEventListener("submit",function(e){
+    e.preventDefault(); 
+    
+    const sendBtn = document.getElementById("sendBtn");
+
+    // Gather input data
+    const payload = {
+        name: document.getElementById("name").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        message: document.getElementById("message").value.trim()
+    };
+    
+    // Call the core submission handler
+    handleSubmission(payload, sendBtn, false); // openWhatsappAfter set to false by default
   });
 </script>
 
