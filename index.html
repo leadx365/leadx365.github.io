@@ -17,12 +17,14 @@
       --radius: 14px;
       --text: #0b0b0b;
       --muted: #666;
+      --popup-gradient: linear-gradient(135deg,#6a11cb,#2575fc);
     }
 
     html,body{
       height:100%;margin:0;
       font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto;
       background:var(--bg);color:var(--text);
+      -webkit-font-smoothing:antialiased;
     }
 
     a{text-decoration:none;color:inherit}
@@ -32,7 +34,7 @@
     /* HEADER */
     header{
       position:sticky;top:0;z-index:30;
-      background:rgba(255,255,255,0.85);
+      background:rgba(255,255,255,0.95);
       backdrop-filter:blur(6px);
       border-bottom:1px solid rgba(0,0,0,0.05);
     }
@@ -42,133 +44,91 @@
       padding:10px 20px;max-width:var(--max-w);margin:0 auto;
     }
 
-    .brand{
-      display:flex;align-items:center;gap:10px;
-    }
-
-    .brand img{
-      height:40px;width:auto;
-      object-fit:contain;
-    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{height:40px;width:auto;object-fit:contain}
+    .brand h4{margin:0;font-size:18px;font-weight:700}
 
     .menu{display:flex;gap:18px;align-items:center}
-    .menu a{padding:8px 6px;font-weight:600;opacity:0.9}
-
-    .btn-cta{
-      border:2px solid #000;padding:8px 16px;border-radius:26px;
-      font-weight:700;background:transparent;
-    }
+    .menu a{padding:8px 6px;font-weight:600;opacity:0.95}
+    .btn-cta{border:2px solid #000;padding:8px 16px;border-radius:26px;font-weight:700;background:transparent}
 
     /* HERO */
     .hero{
-      width:92%;max-width:980px;
-      margin:20px auto;
-      border-radius:20px;
-      padding:40px 20px;
-      text-align:center;color:#fff;
-      background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
-      box-shadow:0 14px 32px rgba(37,117,252,0.18);
-      position:relative;
-      overflow:hidden;
+      width:92%;max-width:980px;margin:20px auto;border-radius:20px;padding:40px 20px;
+      text-align:center;color:#fff;background:linear-gradient(135deg,var(--accent-a),var(--accent-b),var(--accent-c));
+      box-shadow:0 14px 32px rgba(37,117,252,0.18);position:relative;overflow:hidden;
     }
-
-    /* AI HEAD BLEND — best version */
     .hero::after{
-      content:"";
-      position:absolute;
-      bottom:-40px;
-      right:-140px;
-      width:420px;
-      height:420px;
+      content:"";position:absolute;bottom:-40px;right:-140px;width:420px;height:420px;
       background:url("https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png") no-repeat center/contain;
-      opacity:0.12;
-      mix-blend-mode:soft-light;
-      pointer-events:none;
-      z-index:1;
+      opacity:0.12;mix-blend-mode:soft-light;pointer-events:none;z-index:1;
     }
-
-    /* Mobile hero image fix */
     @media(max-width:700px){
-      .hero::after{
-        width:240px;
-        height:240px;
-        bottom:-10px;
-        right:-90px;
-        opacity:0.09;
-      }
+      .hero::after{width:240px;height:240px;bottom:-10px;right:-90px;opacity:0.09}
       .menu{display:none}
       .brand h4{display:none}
     }
-
     .hero h1{font-size:32px;margin:0 0 10px;font-weight:800}
     .hero p{margin:0 0 14px;color:#fff}
-    .hero .btn{
-      display:inline-block;background:#fff;color:#000;border:2px solid #000;
-      padding:12px 24px;border-radius:28px;font-weight:700;
-    }
+    .hero .btn{display:inline-block;background:#fff;color:#000;border:2px solid #000;padding:12px 24px;border-radius:28px;font-weight:700}
 
     section{max-width:var(--max-w);margin:34px auto;padding:0 20px}
     h2{font-size:24px;margin:8px 0 16px;font-weight:800}
-
     p.lead{color:var(--muted);font-size:16px;margin-bottom:16px}
 
-    .grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:18px;
-    }
-
-    .card{
-      background:var(--card-bg);padding:20px;border-radius:var(--radius);
-      box-shadow:0 6px 16px rgba(0,0,0,0.04);
-    }
-
-    .testi{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:16px;
-    }
-
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+    .card{background:var(--card-bg);padding:20px;border-radius:var(--radius);box-shadow:0 6px 16px rgba(0,0,0,0.04)}
+    .testi{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
     .stars{font-size:18px;color:#fbbf24;margin-bottom:6px}
 
-    .cta{
-      margin:28px auto;padding:34px;border-radius:16px;text-align:center;
-      background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
-      color:#fff;
-    }
+    .cta{margin:28px auto;padding:34px;border-radius:16px;text-align:center;background:linear-gradient(135deg,var(--accent-a),var(--accent-b));color:#fff}
+    .cta .btn{display:inline-block;margin-top:14px;padding:12px 22px;border-radius:28px;background:#fff;color:#000;border:2px solid #000;font-weight:700}
 
-    .cta .btn{
-      display:inline-block;margin-top:14px;
-      padding:12px 22px;border-radius:28px;
-      background:#fff;color:#000;border:2px solid #000;font-weight:700;
-    }
+    .floating-ai{position:fixed;right:10px;bottom:20px;width:300px;opacity:0.07;pointer-events:none;z-index:-1}
+    @media(max-width:700px){.floating-ai{display:none}}
 
-    /* Floating AI (desktop only) */
-    .floating-ai{
-      position:fixed;
-      right:10px;
-      bottom:20px;
-      width:300px;
-      opacity:0.07;
-      pointer-events:none;
-      z-index:-1;
-    }
-
-    @media(max-width:700px){
-      .floating-ai{display:none;}
-    }
-
-    /* Fade-in */
     .reveal{opacity:0;transform:translateY(20px);transition:all .6s ease}
     .reveal.in{opacity:1;transform:none}
 
     /* WhatsApp FAB */
-    .whatsapp{
-      position:fixed;bottom:18px;right:18px;width:56px;height:56px;
-      background:#25D366;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      border:4px solid #fff;box-shadow:0 10px 28px rgba(0,0,0,0.15);
-      z-index:50;
-    }
+    .whatsapp{position:fixed;bottom:18px;right:18px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;border:4px solid #fff;box-shadow:0 10px 28px rgba(0,0,0,0.15);z-index:60}
     .whatsapp svg{width:30px;height:30px;fill:#fff}
+
+    /* --- POPUP STYLES (Gradient popup - Option B) --- */
+    .lead-popup-backdrop{
+      position:fixed;inset:0;background:rgba(10,10,10,0.35);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:all .28s ease;
+    }
+    .lead-popup-backdrop.open{opacity:1;pointer-events:auto}
+    .lead-popup{
+      width:420px;max-width:92%;border-radius:14px;padding:18px 18px 16px;background:var(--popup-gradient);color:#fff;box-shadow:0 20px 60px rgba(40,20,80,0.28);transform:translateY(18px);transition:all .28s ease;
+    }
+    .lead-popup.open{transform:none}
+    .lead-popup header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .lead-popup header h3{margin:0;font-size:20px}
+    .lead-popup .desc{opacity:0.95;font-size:14px;margin-bottom:10px}
+    .lead-popup form{display:flex;flex-direction:column;gap:10px}
+    .lead-popup input, .lead-popup textarea{
+      border:0;border-radius:10px;padding:12px;font-size:15px;
+      outline:none;
+    }
+    .lead-popup input::placeholder, .lead-popup textarea::placeholder{color:rgba(0,0,0,0.45)}
+    .lead-popup .field{
+      background:#fff;padding:6px;border-radius:10px;color:#000;
+    }
+    .lead-popup .actions{display:flex;gap:10px;align-items:center;margin-top:6px}
+    .lead-popup .actions .btn{
+      flex:1;padding:12px;border-radius:10px;border:0;font-weight:800;cursor:pointer;
+    }
+    .lead-popup .actions .btn.btn-primary{background:#000;color:#fff}
+    .lead-popup .actions .btn.btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.16);color:#fff}
+    .lead-popup .close-x{background:transparent;border:0;color:rgba(255,255,255,0.9);font-weight:700;cursor:pointer;font-size:18px}
+    .lead-toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:#101010;color:#fff;padding:10px 14px;border-radius:10px;z-index:300;box-shadow:0 8px 30px rgba(16,16,16,0.35);opacity:0;pointer-events:none;transition:all .25s ease}
+    .lead-toast.show{opacity:1;pointer-events:auto}
+
+    @media(max-width:480px){
+      .lead-popup{padding:14px}
+      .lead-popup header h3{font-size:18px}
+    }
   </style>
 </head>
 
@@ -193,7 +153,6 @@
 </header>
 
 <main>
-
   <!-- HERO -->
   <section class="hero reveal">
     <h1>Grow Your Business With AI 🚀</h1>
@@ -201,18 +160,13 @@
     <a class="btn" href="#contact" id="hero-cta">Start Your Growth Journey</a>
   </section>
 
-  <!-- ABOUT -->
+  <!-- CONTENT (kept core) -->
   <section id="about" class="reveal">
-    <div class="container">
-      <h2>About LeadX365</h2>
-      <p class="lead">We help businesses grow using AI-powered tools, automation, and 24/7 workflows.</p>
-    </div>
+    <div class="container"><h2>About LeadX365</h2><p class="lead">We help businesses grow using AI-powered tools, automation, and 24/7 workflows.</p></div>
   </section>
 
-  <!-- SERVICES -->
   <section id="services" class="reveal">
-    <div class="container">
-      <h2>Our Services</h2>
+    <div class="container"><h2>Our Services</h2>
       <div class="grid">
         <div class="card"><h3>AI Lead Automation</h3><p>Capture, nurture & convert leads automatically.</p></div>
         <div class="card"><h3>WhatsApp Automation</h3><p>Instant replies, follow-ups & customer engagement.</p></div>
@@ -221,10 +175,8 @@
     </div>
   </section>
 
-  <!-- PRICING -->
   <section id="pricing" class="reveal">
-    <div class="container">
-      <h2>Our Pricing</h2>
+    <div class="container"><h2>Our Pricing</h2>
       <div class="grid">
         <div class="card"><h3>Starter – ₹1,899</h3><p>Basic automation + WhatsApp replies.</p></div>
         <div class="card"><h3>Growth – ₹4,999</h3><p>Advanced AI + follow-ups + ads.</p></div>
@@ -233,10 +185,8 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
   <section id="testimonials" class="reveal">
-    <div class="container">
-      <h2>Testimonials</h2>
+    <div class="container"><h2>Testimonials</h2>
       <div class="testi">
         <div class="card"><div class="stars">⭐⭐⭐⭐⭐</div><strong>Ravi Kumar</strong><p>"LeadX365 helped me generate 50+ new leads every week."</p></div>
         <div class="card"><div class="stars">⭐⭐⭐⭐⭐</div><strong>Megha Store</strong><p>"WhatsApp automation saved us hours daily."</p></div>
@@ -245,32 +195,13 @@
     </div>
   </section>
 
-  <!-- FAQ -->
   <section id="faq" class="reveal">
-    <div class="container">
-      <h2>FAQ</h2>
+    <div class="container"><h2>FAQ</h2>
       <p><b>How do you generate leads?</b><br>AI + ads + automated follow-ups.</p>
       <p><b>Is this for small businesses?</b><br>Yes, built for all industries.</p>
-      <p><b>Do I need technical skills?</b><br>No setup required.</p>
-      <p><b>How fast are results?</b><br>7–15 days average.</p>
     </div>
   </section>
 
-  <!-- WHY -->
-  <section class="reveal">
-    <div class="container">
-      <h2>Why Choose Us?</h2>
-      <ul class="why">
-        <li>AI-powered automation</li>
-        <li>Zero manual work</li>
-        <li>Affordable plans</li>
-        <li>Works for all industries</li>
-        <li>Proven results</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
   <section id="contact" class="reveal">
     <div class="container">
       <h2>Ready to Grow? Let's Talk!</h2>
@@ -293,7 +224,6 @@
     </div>
   </section>
 
-  <!-- FINAL CTA -->
   <section class="cta reveal">
     <h2>Ready to Grow?</h2>
     <a class="btn" href="#contact">Get in Touch</a>
@@ -305,8 +235,34 @@
 <!-- FLOATING AI -->
 <img class="floating-ai" src="https://i.ibb.co/t5Bbt6p/file-0000000068f07207a996dafeb290b82a.png" alt="AI Graphic">
 
+<!-- POPUP (Gradient) -->
+<div id="leadPopupBackdrop" class="lead-popup-backdrop" aria-hidden="true">
+  <div id="leadPopup" class="lead-popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+    <header>
+      <h3 id="popupTitle">Want a free AI growth audit?</h3>
+      <button class="close-x" id="popupClose" aria-label="Close">✕</button>
+    </header>
+    <div class="desc">Share your name & WhatsApp — we'll send a quick audit + next steps.</div>
+
+    <form id="popup-form">
+      <div class="field"><input id="popup-name" name="name" placeholder="Your name" required></div>
+      <div class="field"><input id="popup-phone" name="phone" placeholder="WhatsApp number" required></div>
+      <div class="field"><input id="popup-email" name="email" placeholder="Email (optional)"></div>
+      <textarea id="popup-message" name="message" placeholder="Message (optional)" rows="2" style="border-radius:10px;padding:10px"></textarea>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary" id="popup-send">Get Audit</button>
+        <button type="button" class="btn btn-ghost" id="popup-skip">Maybe later</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="leadToast" class="lead-toast" role="status" aria-live="polite"></div>
+
 <!-- WHATSAPP FAB -->
-<a class="whatsapp" href="https://wa.me/919000810084" target="_blank">
+<a class="whatsapp" href="https://wa.me/919000810084" target="_blank" aria-label="WhatsApp">
   <svg viewBox="0 0 32 32"><path d="M19.11 17.8c-.31-.16-1.81-.89-2.09-.99-.28-.1-.49-.16-.7.16s-.8.99-.98 1.2c-.18.2-.36.22-.67.08-.31-.14-1.32-.49-2.51-1.54-.93-.83-1.56-1.86-1.74-2.17-.18-.31-.02-.48.13-.63.13-.13.28-.34.42-.51.14-.17.18-.28.28-.46.09-.18.05-.34-.03-.5-.08-.16-.7-1.68-.96-2.3-.25-.6-.51-.52-.7-.53-.18-.01-.4-.01-.62-.01-.21 0-.55.08-.84.39-.28.31-1.1 1.07-1.1 2.6 0 1.53 1.12 3.01 1.28 3.22.16.21 2.21 3.4 5.36 4.77 3.14 1.37 3.14.91 3.7.86.57-.05 1.81-.74 2.06-1.45.25-.71.25-1.32.18-1.45-.07-.13-.25-.2-.56-.36zM16 4C9.37 4 4 9.37 4 16c0 1.95.47 3.78 1.3 5.39L4 28l6.9-1.25C12.2 27.16 14.04 27.5 16 27.5 22.63 27.5 28 22.13 28 15.5 28 8.87 22.63 4 16 4z"/></svg>
 </a>
 
@@ -315,8 +271,78 @@
 </footer>
 
 <script>
-  document.getElementById("year").innerText = new Date().getFullYear();
+/* -------------------------
+  Configuration
+------------------------- */
 
+// Your Google Apps Script web app /exec URL (already deployed)
+const ACTION_URL = "https://script.google.com/macros/s/AKfycbxa2rVhKHenxqSPHld3u2WPmBufjj4cXA5zo9DbnLmXVgAWBlUFVDjgcgvsBsdtBqJd/exec";
+
+// Popup auto-open delay (ms)
+const POPUP_DELAY = 6000; // 6 seconds
+
+// Popup repeat cooldown (ms) — 24 hours
+const POPUP_COOLDOWN = 1000 * 60 * 60 * 24;
+
+/* -------------------------
+  Utilities
+------------------------- */
+
+function showToast(text, timeout = 3500){
+  const t = document.getElementById("leadToast");
+  t.innerText = text;
+  t.classList.add("show");
+  clearTimeout(t._to);
+  t._to = setTimeout(()=> t.classList.remove("show"), timeout);
+}
+
+/* -------------------------
+  Form submission (shared)
+------------------------- */
+
+async function submitLead(payload, btnEl, showSuccessMsg = true){
+  if(!payload.name || !payload.phone){
+    showToast("Please enter name & phone.");
+    return false;
+  }
+
+  try{
+    if(btnEl) { btnEl.disabled = true; btnEl.innerText = "Sending..."; }
+
+    const res = await fetch(ACTION_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+      cache: "no-store"
+    });
+
+    if(!res.ok){
+      throw new Error("Network response was not ok");
+    }
+
+    const json = await res.json();
+    if(json && json.success){
+      if(showSuccessMsg) showToast("Thanks — we received your request!");
+      return true;
+    } else {
+      throw new Error(json && json.message ? json.message : "Save failed");
+    }
+
+  } catch(err){
+    console.error("submitLead error:", err);
+    showToast("Failed to send — please WhatsApp us directly.");
+    return false;
+  } finally {
+    if(btnEl){ btnEl.disabled = false; btnEl.innerText = btnEl.dataset.orig || "Send Request"; }
+  }
+}
+
+/* -------------------------
+  Main form handler
+------------------------- */
+
+document.addEventListener("DOMContentLoaded", function(){
+  // Reveal animations
   const reveals = document.querySelectorAll(".reveal");
   const obs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
@@ -325,16 +351,131 @@
   },{threshold:.15});
   reveals.forEach(r=>obs.observe(r));
 
-  document.getElementById("hero-cta").addEventListener("click",function(e){
+  document.getElementById("year").innerText = new Date().getFullYear();
+
+  // Main form
+  const leadForm = document.getElementById("lead-form");
+  const sendBtn = document.getElementById("sendBtn");
+  if(sendBtn) sendBtn.dataset.orig = sendBtn.innerText;
+
+  leadForm.addEventListener("submit", async function(e){
     e.preventDefault();
-    document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
+    const payload = {
+      source: "website_form",
+      name: document.getElementById("name").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      message: document.getElementById("message").value.trim(),
+      ts: new Date().toISOString()
+    };
+
+    const ok = await submitLead(payload, sendBtn, true);
+    if(ok){
+      leadForm.reset();
+    }
   });
 
-  document.getElementById("waBtn").addEventListener("click",function(){
+  // WhatsApp button inside form
+  const waBtn = document.getElementById("waBtn");
+  waBtn.addEventListener("click", function(){
     const name = document.getElementById("name").value || "";
     const msg = encodeURIComponent("Hi, I am interested. Name: "+name);
     window.open("https://wa.me/919000810084?text="+msg, "_blank");
   });
+
+  /* -------------------------
+    Popup logic
+  ------------------------- */
+  const popupBackdrop = document.getElementById("leadPopupBackdrop");
+  const popup = document.getElementById("leadPopup");
+  const popupClose = document.getElementById("popupClose");
+  const popupSkip = document.getElementById("popup-skip");
+  const popupForm = document.getElementById("popup-form");
+  const popupSend = document.getElementById("popup-send");
+  popupSend.dataset.orig = popupSend.innerText;
+
+  function openPopup(){
+    popupBackdrop.classList.add("open");
+    popup.classList.add("open");
+    popupBackdrop.setAttribute("aria-hidden","false");
+    // focus first field
+    setTimeout(()=> document.getElementById("popup-name").focus(), 200);
+  }
+  function closePopup(){
+    popupBackdrop.classList.remove("open");
+    popup.classList.remove("open");
+    popupBackdrop.setAttribute("aria-hidden","true");
+  }
+
+  popupClose.addEventListener("click", function(){ 
+    closePopup();
+    localStorage.setItem("leadx_popup_shown", Date.now().toString());
+  });
+  popupSkip.addEventListener("click", function(){
+    closePopup();
+    localStorage.setItem("leadx_popup_shown", Date.now().toString());
+  });
+
+  popupForm.addEventListener("submit", async function(e){
+    e.preventDefault();
+    const payload = {
+      source: "popup",
+      name: document.getElementById("popup-name").value.trim(),
+      phone: document.getElementById("popup-phone").value.trim(),
+      email: document.getElementById("popup-email").value.trim(),
+      message: document.getElementById("popup-message").value.trim(),
+      ts: new Date().toISOString()
+    };
+
+    const ok = await submitLead(payload, popupSend, true);
+    if(ok){
+      popupForm.reset();
+      closePopup();
+      // Save cooldown for 24h
+      localStorage.setItem("leadx_popup_shown", Date.now().toString());
+    }
+  });
+
+  // Auto-open logic: only if not shown in last 24h
+  try {
+    const last = parseInt(localStorage.getItem("leadx_popup_shown") || "0", 10);
+    const now = Date.now();
+    if(isNaN(last) || (now - last) > POPUP_COOLDOWN){
+      setTimeout(()=> openPopup(), POPUP_DELAY);
+    }
+  } catch(err){
+    // localStorage blocked, just open once after delay
+    setTimeout(()=> openPopup(), POPUP_DELAY);
+  }
+
+  // Close on backdrop click
+  popupBackdrop.addEventListener("click", function(e){
+    if(e.target === popupBackdrop){
+      closePopup();
+      localStorage.setItem("leadx_popup_shown", Date.now().toString());
+    }
+  });
+
+  // Accessibility: ESC closes popup
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+      if(popupBackdrop.classList.contains("open")){
+        closePopup();
+        localStorage.setItem("leadx_popup_shown", Date.now().toString());
+      }
+    }
+  });
+
+  // Hero CTA smooth scroll
+  const heroCta = document.getElementById("hero-cta");
+  if(heroCta){
+    heroCta.addEventListener("click", function(e){
+      e.preventDefault();
+      document.querySelector("#contact").scrollIntoView({behavior:"smooth"});
+    });
+  }
+
+}); // domContentLoaded
 </script>
 
 </body>
