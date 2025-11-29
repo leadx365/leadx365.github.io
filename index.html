@@ -480,3 +480,28 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
+<script>
+
+  // Other animations and scrolling code stays same
+
+  document.getElementById("lead-form").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const text = encodeURIComponent(
+        `New Lead from Website\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nMessage: ${message}`
+      );
+
+      // Your WhatsApp number
+      const waNumber = "919000810084";
+
+      window.open(`https://wa.me/${waNumber}?text=${text}`, "_blank");
+  });
+
+</script>
+</body>
+</html>
