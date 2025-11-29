@@ -404,7 +404,8 @@
   // --- CORE VARS AND FUNCTIONS ---
   document.getElementById("year").innerText = new Date().getFullYear();
 
-  // *** IMPORTANT: THIS ACTION_URL IS UPDATED TO YOUR LATEST DEPLOYMENT (Version 4 @ 6:24 PM) ***
+  // *** IMPORTANT: REPLACE THIS URL WITH YOUR NEW, AUTHORIZED WEB APP URL (FROM VERSION 4) ***
+  // URL from Image 1000293817.png:
   const ACTION_URL = "https://script.google.com/macros/s/AKfycbwIex7UoXz0vE_RLOCKLHLKEHEMEI-i9RMX-ICD6KzLGLTDYgYWx/exec"; 
   
   const form = document.getElementById("lead-form");
@@ -500,7 +501,7 @@
       if(res.ok){
         const result = await res.json();
         
-        // Check for the success message defined in the Apps Script (result.result === "success")
+        // Check for the success message defined in the Apps Script
         if(result.result === "success"){ 
             showToast("✓ Submitted! We will contact you shortly.", 3000);
             form.reset(); // Clear the form on success
