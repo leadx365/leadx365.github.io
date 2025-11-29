@@ -409,24 +409,32 @@
     window.open("https://wa.me/919000810084?text="+msg, "_blank");
   });
 
-  // 1. UPDATE: Use Sheetbest URL
+  // --- Sheetbest Form Handler ---
+
+  // 1. Sheetbest URL
   const ACTION_URL = "https://api.sheetbest.com/sheets/b256dccd-daeb-4a1d-ba8b-68dbb1caf3b0";
   const form = document.getElementById("lead-form");
   const msg = document.getElementById("form-msg");
   const sendBtn = document.getElementById("sendBtn");
+  
+  // Get input elements
+  const nameInput = document.getElementById("name");
+  const phoneInput = document.getElementById("phone");
+  const emailInput = document.getElementById("email");
+  const messageInput = document.getElementById("message");
 
-  // 2. UPDATE: Modified Form Handler to use Fetch and prevent redirect
+  // 2. Form Handler
   form.addEventListener("submit",async function(e){
-    e.preventDefault(); // Crucial: Prevents default form submission and page redirect
+    e.preventDefault(); // CRITICAL: Stops the page from redirecting/reloading
     msg.style.display="none";
 
     const payload = {
-      // Sheetbest expects the data object as the body
+      // Sheetbest requires the data object to be wrapped
       data: {
-        name: name.value.trim(),
-        phone: phone.value.trim(),
-        email: email.value.trim(),
-        message: message.value.trim(),
+        name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        email: emailInput.value.trim(),
+        message: messageInput.value.trim(),
         ts: new Date().toISOString()
       }
     };
@@ -446,20 +454,20 @@
         body:JSON.stringify(payload)
       });
 
-      // Sheetbest responds with 200/201 on success
+      // Check for success status (200-299)
       if(res.ok){
         msg.style.color="green";msg.style.display="block";
-        // 3. UPDATE: Display success message on the same page
-        msg.innerText="Submitted! We received your request and will contact you shortly.";
-        form.reset();
+        // SUCCESS MESSAGE
+        msg.innerText="Submitted! We received your request and will contact you shortly. ✅";
+        form.reset(); // Clears the form fields
       } else { 
-        // Try to parse the error message if the response is not OK
+        // Handle API errors
         const errorData = await res.json();
-        throw new Error(errorData.message || "Unknown error"); 
+        throw new Error(errorData.message || "Sheetbest Error"); 
       }
 
     } catch(err){
-      console.error("Sheetbest Error:", err);
+      console.error("Submission Error:", err);
       msg.style.color="red";msg.style.display="block";
       msg.innerText="Submission Failed — please WhatsApp us directly.";
     }
