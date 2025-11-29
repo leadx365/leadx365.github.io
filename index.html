@@ -72,7 +72,7 @@
       overflow:hidden;
     }
 
-    /* AI HEAD BLEND — best version */
+    /* AI HEAD BLEND */
     .hero::after{
       content:"";
       position:absolute;
@@ -404,7 +404,7 @@
   // --- CORE VARS AND FUNCTIONS ---
   document.getElementById("year").innerText = new Date().getFullYear();
 
-  // *** USE YOUR CORRECT, DEPLOYED GOOGLE APPS SCRIPT URL HERE ***
+  // *** IMPORTANT: REPLACE THIS URL WITH YOUR NEW, AUTHORIZED WEB APP URL ***
   const ACTION_URL = "https://script.google.com/macros/s/AKfycbxKyB-0YtDERz4UG3xZdZTGTAJpDxteHHEo4qYWhsT5AYxvewG8EHd/exec"; 
   
   const form = document.getElementById("lead-form");
@@ -459,10 +459,10 @@
     window.open("https://wa.me/919000810084?text="+msg, "_blank");
   });
 
-  // --- CORE SUBMISSION LOGIC (Corrected Version) ---
+  // --- CORE SUBMISSION LOGIC (CORRECTED) ---
 
   async function handleSubmission(payload, btnEl, openWhatsappAfter = false){
-    // Validation Check (Name/Phone keys are used from the form input, which are lowercase)
+    // Validation Check (Uses lowercase keys from the listener)
     if(!payload.name || !payload.phone){ 
       showToast("Please enter name & phone.", 3000, true);
       return;
@@ -476,7 +476,7 @@
 
     showToast("Saving lead...");
 
-    // *** CRITICAL CORRECTION: Added the 'data' wrapper required by Apps Script ***
+    // *** CRITICAL FIX: The Apps Script requires the 'data' wrapper around the sheet values ***
     const sheetPayload = {
       data: { 
           // Keys here MUST match your Google Sheet headers: Timestamp, Source, Name, Phone, Email, Message
@@ -488,7 +488,7 @@
           "Message": payload.message
       }
     };
-    // *** END CORRECTION ***
+    // *** END CRITICAL FIX ***
 
     try {
       const res = await fetch(ACTION_URL, {
@@ -497,11 +497,10 @@
         body: JSON.stringify(sheetPayload)
       });
       
-      // Apps Script typically returns a 200 OK, but we must check the JSON response
       if(res.ok){
         const result = await res.json();
         
-        // The Apps Script returns {result: "success"} on success
+        // Check for the success message defined in the Apps Script
         if(result.result === "success"){ 
             showToast("✓ Submitted! We will contact you shortly.", 3000);
             form.reset(); // Clear the form on success
@@ -509,17 +508,17 @@
                // Logic to open WhatsApp after success
             }
         } else {
-            // Handle error response from Apps Script script
+            // Error response from the Apps Script code itself (e.g., if sheet access fails)
              throw new Error(result.message || "Apps Script rejected the data.");
         }
       } else {
-        // Handle non-200 HTTP status (e.g., 403 Forbidden due to bad deployment settings)
+        // Non-200 HTTP status (e.g., 403 Forbidden due to unauthorized access)
         showToast(`Error: Status ${res.status}. Check deployment access.`, 3000, true);
         throw new Error(`HTTP Error: ${res.status}`);
       }
     } catch (err) {
       console.error("Submission Error:", err);
-      // Fallback error message
+      // Fallback error message (the one requested by the user)
       showToast("Submission Failed — please WhatsApp us directly.", 5000, true);
     }
 
@@ -550,4 +549,5 @@
 </script>
 
 </body>
-</html>
+      </html>
+          
